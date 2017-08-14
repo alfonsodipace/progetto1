@@ -8,9 +8,9 @@
 <script src="js/jquery.js"></script>  <!--  LIBRERIA JQUERY -->
 <script src="js/Validation.js"></script>
 </head>
-<%@ include file="fragments/header.jsp"%>
+
 <body>
- 
+ <%@ include file="fragments/header.jsp"%>
  <script>
 	$(document).ready(function(){
  		$('#submit').prop("disabled",true);
