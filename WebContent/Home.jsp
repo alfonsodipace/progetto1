@@ -10,6 +10,8 @@
 <script src="js/jquery.js" ></script>  <!--  LIBRERIA JQUERY -->
 </head>
 
+
+<%@ include file="fragments/header.jsp"%>
 <script>
 
 
