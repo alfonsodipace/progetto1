@@ -39,28 +39,21 @@ public class AjaxController extends HttpServlet {
 		String email = request.getParameter("email");
 
 		UtenteBeanDao dao = new UtenteBeanDao();
-
-
 		UtenteBean bn1;
+		
 		try {
 			bn1 = dao.doRetrieveByKey(email);
 
-			if(email.equals(bn1.getEmail()))
-			{
+			if(email.equals(bn1.getEmail())) {
 				out.println(" already in use");
 			}
-			else{
+			else {
 				out.println(" avaiable");		
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-
-
-
-
-		
 
 	}
 
