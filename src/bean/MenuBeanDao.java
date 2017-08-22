@@ -1,5 +1,6 @@
 package bean;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ public class MenuBeanDao implements MenuBeanDaoInterface {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		String insertSQL = "INSERT INTO " + MenuBeanDao.TABLE_NAME+ " (idmenu, nome, prezzo, datainizio, datafine) VALUES (?, ?, ?, ?, ?)";
+		String insertSQL = "INSERT INTO " + MenuBeanDao.TABLE_NAME+ " (idmenu, nome, prezzo, datainizio, datafine, image) VALUES (?, ?, ?, ?, ?, ?)";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -26,6 +27,7 @@ public class MenuBeanDao implements MenuBeanDaoInterface {
 			preparedStatement.setDouble(3, data.getPrezzo());
 			preparedStatement.setString(4, data.getDataInizio());
 			preparedStatement.setString(5, data.getDataFine());
+			preparedStatement.setBlob(6, data.getImage());
 			preparedStatement.executeUpdate();
 			connection.commit();
 		} finally {
@@ -83,6 +85,7 @@ public class MenuBeanDao implements MenuBeanDaoInterface {
 				bean.setPrezzo(rs.getDouble(3));
 				bean.setDataInizio(rs.getString(4));
 				bean.setDataFine(rs.getString(5));
+				bean.setImage((InputStream) rs.getBlob(6));
 			}
 		} finally {
 			try {
@@ -122,6 +125,7 @@ public class MenuBeanDao implements MenuBeanDaoInterface {
 				bean.setPrezzo(rs.getDouble("prezzo"));
 				bean.setDataInizio(rs.getString("datainizio"));
 				bean.setDataFine(rs.getString("datafine"));
+				bean.setImage((InputStream) rs.getBlob("image"));
 				menu.add(bean);
 			}
 		} finally {

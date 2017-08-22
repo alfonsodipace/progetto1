@@ -142,4 +142,42 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 		}
 	}
 
+	@Override
+	public Collection<ProdottoBean> doRetrieveAllByTipo(String tipo) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		Collection<ProdottoBean> prod = new LinkedList<ProdottoBean>();
+
+		String selectSQL = "SELECT * FROM " + ProdottoBeanDao.TABLE_NAME + "WHERE tipo ="+tipo;
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				ProdottoBean bean = new ProdottoBean();
+
+				bean.setNome(rs.getString("nomeprodotto"));
+				bean.setTipo(rs.getString("tipo"));
+				bean.setDesc(rs.getString("descrizione"));
+				bean.setPrezzo(rs.getDouble("prezzo"));
+				bean.setDisp(rs.getInt("disponiilita"));
+				bean.setVenduti(rs.getInt("venduti"));
+				prod.add(bean);
+			}
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+		return prod;
+	}
+
+
 }

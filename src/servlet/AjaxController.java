@@ -45,7 +45,7 @@ public class AjaxController extends HttpServlet {
 			bn1 = dao.doRetrieveByKey(email);
 
 			if(email.equals(bn1.getEmail())) {
-				out.println(" already in use");
+				out.println("not avaiable");
 			}
 			else {
 				out.println(" avaiable");		

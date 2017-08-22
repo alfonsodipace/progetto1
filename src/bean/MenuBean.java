@@ -1,5 +1,7 @@
 package bean;
 
+import java.io.InputStream;
+
 public class MenuBean {
 
 	private int idmenu;
@@ -7,8 +9,15 @@ public class MenuBean {
 	private double prezzo;
 	private String dataInizio;
 	private String dataFine;
+	private InputStream image;
 	
 	
+	public InputStream getImage() {
+		return image;
+	}
+	public void setImage(InputStream image) {
+		this.image = image;
+	}
 	public int getIdmenu() {
 		return idmenu;
 	}

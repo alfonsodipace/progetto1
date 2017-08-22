@@ -1,23 +1,6 @@
 /**
  * 			VALIDAZIONE CAMPI PAGINA REGISTRAZIONE
  */
-
-
-$(document).ready(function(){       // check e-mail availability with ajax 
-    $("#email").blur(function(){
-        var email = $(this).val();
-             $.ajax({
-                type: "GET",
-                url: "AjaxController",
-                data: "email="+ email,
-                success: function(msg){  
-                        $("#emo2").html(msg);
-                }
-            }); 
-    });
-});
-
-
 var email,nome,pass,cognome,indirizzo;
 email=nome=pass=cognome=indirizzo=0;
 
@@ -25,12 +8,25 @@ function ValidareEmail(text) {
 	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 	if(text.value.match(mailformat)) {
 		email=1;
-		document.getElementById("emo").innerHTML = "";
+		$("#email").blur(function(){
+	        var email = $(this).val();
+	             $.ajax({
+	                type: "GET",
+	                url: "AjaxController",
+	                data: "email="+ email,
+	                success: function(msg){  
+	                	var errpos = form["email"];
+			var msgEl = document.getElementById("span").innerHTML=msg;
+
+
+	                }
+	            }); 
+	    });
 		EnableDisableButton();
 	}
 	else {
 		email=0;
-		document.getElementById("emo").innerHTML = "*";
+		document.getElementById("span").innerHTML = "formato email non corretto";
 		EnableDisableButton();
 	}
 }
@@ -40,12 +36,12 @@ function ValidareNome(text) {
 	var user = /^[a-z+A-z]+$/;
 	if(text.value.match(user)) {
 		nome=1;
-		document.getElementById("name").innerHTML = "";
+		document.getElementById("name").innerHTML = ""; // per cancellare nel caso si corregga!!!
 		EnableDisableButton();
 	}
 	else { 
 		nome=0;
-		document.getElementById("name").innerHTML = "*";
+		document.getElementById("name").innerHTML = "Formato nome non corretto";
 		EnableDisableButton();
 	}
 }
@@ -55,12 +51,11 @@ function ValidareCognome(text) {
 	var user = /^[a-z+A-z]+$/;
 	if(text.value.match(user)) {
 		cognome=1;
-		document.getElementById("surname").innerHTML = "";
 		EnableDisableButton();
 	}
 	else { 
 		cognome=0;
-		document.getElementById("surname").innerHTML = "*";
+		document.getElementById("surname").innerHTML = "formato cognome non corretto";
 		EnableDisableButton();
 	}
 }
@@ -69,32 +64,20 @@ function ValidareCognome(text) {
 function ValidarePassword(text) {
 	if(text.value.length > 6) {
 		pass=1;
-		document.getElementById("pasw").innerHTML = "";
 		EnableDisableButton();
 	}
 	else{
 		pass=0;
-		document.getElementById("pasw").innerHTML = "*";
+		document.getElementById("psw").innerHTML = "formato password non corretto";
 		EnableDisableButton();
 	}
 }
 
-function ValidareIndirizzo(text) {
-	if(text.value.length > 5) {
-		indirizzo=1;
-		document.getElementById("address").innerHTML = "";
-		EnableDisableButton();
-	}
-	else{
-		indirizzo=0;
-		document.getElementById("address").innerHTML = "*";
-		EnableDisableButton();
-	}
-}
 
 function EnableDisableButton() {
-	if(email+nome+pass+cognome+indirizzo==5)
+	if(email+nome+pass+cognome==4)
 		$('#submit').prop("disabled",false);
-	else
+	else{
 		$('#submit').prop("disabled",true);
+	}
 }

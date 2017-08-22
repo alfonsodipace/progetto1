@@ -11,6 +11,7 @@ public interface ProdottoBeanDaoInterface {
 	
 	public ProdottoBean doRetrieveByKey(String nome) throws SQLException;
 	
+	public Collection<ProdottoBean> doRetrieveAllByTipo(String tipo) throws SQLException;
 	
 	public Collection<ProdottoBean> doRetrieveAll(String order) throws SQLException;
 }
