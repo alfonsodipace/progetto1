@@ -31,7 +31,7 @@
 </div>
 
 	
-	<form name="reg" id="form" method="POST">
+	<form name="reg" id="form" method="POST" action="sddss">
 <label for="user">Nome</label>
 <input type="text" id="firstname" name="firstname" onkeyup= "ValidareNome(document.reg.firstname)"><span style="color: white;" id=name></span><br>
 <label for="user">Cognome</label>
@@ -44,7 +44,7 @@
 <input type="password" id="pass" name="pass" onkeyup= "ValidarePassword(document.reg.pass)"><span style="color: white;" id=psw></span><br>
 
 
-<input type="submit" id="submit" name="submit" value="Registrati">
+<input type="submit" id="submit" name="submit" value="Registrati"/> <input type="submit" id="login" name="login" value="Ho già un account" onclick="document.reg.action='Accesso.jsp'"/>
 </form>
 		
 
@@ -53,9 +53,9 @@
 			
 
 <footer> 
-<br>
-					<br>
-©2017 Authors Daniele Palmieri, Alfonso di Pace, Marco Amorosi Design by Daniele Palmieri, Alfonso di Pace, Marco Amorosi					
+
+					
+©2017 Authors Daniele Palmieri, Alfonso di Pace, Marco Amorosi 
 </footer>	
 		
 </body>

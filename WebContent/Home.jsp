@@ -81,7 +81,7 @@
 					<br>
 		
 					
-					©2017 Authors Daniele Palmieri, Alfonso di Pace, Marco Amorosi Design by Daniele Palmieri, Alfonso di Pace, Marco Amorosi
+					©2017 Authors Daniele Palmieri, Alfonso di Pace, Marco Amorosi
 					
 </footer>	
 </body>

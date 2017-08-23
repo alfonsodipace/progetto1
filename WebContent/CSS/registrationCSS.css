@@ -25,7 +25,15 @@
 	
 	input{height:30px; border-radius: 10px 10px 10px 10px; width: 120px; margin-bottom: 5px;}
 	
-	#submit{color: white; background-color: #204a87; margin-left: 120px; margin-top: 5px; width: 70px;}
+	#login{
+	margin-left: 10%;
+}
+
+#submit{
+	margin-left: 0%; 
+}
+	
+	#submit, #login{color: white; background-color: #204a87; margin-left: 120px; margin-top: 5px; width: 70px;}
 	
 }
 
@@ -42,34 +50,43 @@ color: #fff;
 font-size:25px;
 }
 input{
-	height:50px;
-
+	height:30px;
+font-size:20px;
 	border-radius: 10px 10px 10px 10px;
 width: 180px;
 margin-bottom: 5px;
 }
+
+#login{
+	margin-left: 5%;
+}
+
 #submit{
+	margin-left: 0%; 
+}
+
+#submit, #login{
+	font-size:15px;
 	color: white;
 background-color: #204a87;
-margin-left: 120px;
 margin-top: 5px;
-width: 90px;
+width: 140px;
 }
 br{
 clear: left;
 }
 
 #form{
-margin-top:10%;
+margin-top:8%;
 margin-left:40%;   
 }
 	
 	
-	h2, h3,p.desc{font-family: Verdana, sans-serif; text-align:center; color:white;font-size: 20px;}
+	h2, h3,p.desc{font-family: Verdana, sans-serif; text-align:center; color:white;font-size: 20px; }
 
 	body{background-color: #2e3436;}
 
-	footer{color:white; background-color: #2e3436;font-size: 13px; text-align:center;}
+	footer{color:white; background-color: #2e3436;font-size: 13px; text-align:center; margin-top:8%;}
 	
 	#menubar{float: left;margin:auto;width: 100%; border-radius: 0px 0px 10px 10px;}
 	

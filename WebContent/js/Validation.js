@@ -22,6 +22,7 @@ function ValidareEmail(text) {
 	                }
 	            }); 
 	    });
+		document.getElementById("span").innerHTML = "";
 		EnableDisableButton();
 	}
 	else {
@@ -36,7 +37,7 @@ function ValidareNome(text) {
 	var user = /^[a-z+A-z]+$/;
 	if(text.value.match(user)) {
 		nome=1;
-		document.getElementById("name").innerHTML = ""; // per cancellare nel caso si corregga!!!
+		document.getElementById("name").innerHTML = "";
 		EnableDisableButton();
 	}
 	else { 
@@ -51,6 +52,7 @@ function ValidareCognome(text) {
 	var user = /^[a-z+A-z]+$/;
 	if(text.value.match(user)) {
 		cognome=1;
+		document.getElementById("surname").innerHTML = "";
 		EnableDisableButton();
 	}
 	else { 
@@ -64,6 +66,7 @@ function ValidareCognome(text) {
 function ValidarePassword(text) {
 	if(text.value.length > 6) {
 		pass=1;
+		document.getElementById("psw").innerHTML = "";
 		EnableDisableButton();
 	}
 	else{
