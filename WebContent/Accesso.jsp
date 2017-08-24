@@ -31,14 +31,14 @@
 </div>
 
 	
-	<form name="reg" id="form" method="POST">
-<label for="user">Email</label>
-<input type="text"  id="email" name="email" ><span style="color: white;" id=span></span><br>
-<label for="user">Password</label>
-<input type="password" id="pass" name="pass"><span style="color: white;" id=psw></span><br>
+<form name="reg" id="form" action="UserAction" method="POST">
+	<label for="user">Email</label>
+	<input type="text"  id="email" name="email" ><span style="color: white;" id=span></span><br>
+	<label for="user">Password</label>
+	<input type="password" id="pass" name="pass"><span style="color: white;" id=psw></span><br>
 
-
-<input type="submit" id="submit" name="submit" value="Accedi"> 
+	<input type="submit" id="submit" name="submit" value="Accedi" > 
+	<input type="hidden" name="action" value="login">
 </form>
 		
 

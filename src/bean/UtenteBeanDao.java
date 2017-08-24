@@ -38,6 +38,7 @@ public class UtenteBeanDao implements UtenteBeanDaoInterface {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		connection.close();
 	}
 
 	@Override

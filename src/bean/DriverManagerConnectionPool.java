@@ -20,7 +20,7 @@ public class DriverManagerConnectionPool {
 	
 	private static Connection createDBConnection() throws SQLException { 
 		Connection newConnection = null;
-		String db = "pw";
+		String db = "web";
 		String username = "root";
 		String password = "root";
 		newConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db, username, password); 
@@ -35,7 +35,7 @@ public class DriverManagerConnectionPool {
 			if (connection.isClosed())
 				connection = DriverManagerConnectionPool.getConnection();
 		} catch (SQLException e) {
-			connection = DriverManagerConnectionPool.getConnection();
+			e.printStackTrace();
 		}
 	} else 
 		connection = DriverManagerConnectionPool.createDBConnection(); 

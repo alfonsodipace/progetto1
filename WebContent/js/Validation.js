@@ -1,40 +1,45 @@
 /**
  * 			VALIDAZIONE CAMPI PAGINA REGISTRAZIONE
  */
-var email,nome,pass,cognome,indirizzo;
-email=nome=pass=cognome=indirizzo=0;
+var email,nome,pass,cognome, message;
+email=nome=pass=cognome=0;
+
+$(document).ready(function() { EnableDisableButton();});
+
 
 function ValidareEmail(text) {
-	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-	if(text.value.match(mailformat)) {
-		email=1;
-		$("#email").blur(function(){
-	        var email = $(this).val();
-	             $.ajax({
-	                type: "GET",
-	                url: "AjaxController",
-	                data: "email="+ email,
-	                success: function(msg){  
-	                	var errpos = form["email"];
-			var msgEl = document.getElementById("span").innerHTML=msg;
+	$("#email").keyup(function(){
+		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		if(text.value.match(mailformat)) {
+			email=1;
+			document.getElementById("span").innerHTML = "";
+			var email = $(this).val();
+			$.ajax({
+				type: "GET",
+				url: "AjaxController",
+				data: "email="+ email,
+				success: function(msg){  
+					message=msg;
 
+					if(msg==" not avaiable") {
+						$('#submit').prop("disabled",true);
+					}
+					document.getElementById("span").innerHTML=msg;
 
-	                }
-	            }); 
-	    });
-		document.getElementById("span").innerHTML = "";
-		EnableDisableButton();
-	}
-	else {
-		email=0;
-		document.getElementById("span").innerHTML = "formato email non corretto";
-		EnableDisableButton();
-	}
+				}
+			}); 
+			EnableDisableButton();
+		}
+		else {
+			email=0;
+			document.getElementById("span").innerHTML = "formato email non corretto";
+			EnableDisableButton();
+		}
+	});
 }
 
-
 function ValidareNome(text) {
-	var user = /^[a-z+A-z]+$/;
+	var user = "^[a-zA-Z\\s]*$";
 	if(text.value.match(user)) {
 		nome=1;
 		document.getElementById("name").innerHTML = "";
@@ -64,7 +69,9 @@ function ValidareCognome(text) {
 
 
 function ValidarePassword(text) {
-	if(text.value.length > 6) {
+	if(text.value.length >=6) {
+		if(message==" avaiable")
+			email=1;
 		pass=1;
 		document.getElementById("psw").innerHTML = "";
 		EnableDisableButton();

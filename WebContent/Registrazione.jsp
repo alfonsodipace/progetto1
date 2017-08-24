@@ -31,20 +31,22 @@
 </div>
 
 	
-	<form name="reg" id="form" method="POST" action="sddss">
-<label for="user">Nome</label>
-<input type="text" id="firstname" name="firstname" onkeyup= "ValidareNome(document.reg.firstname)"><span style="color: white;" id=name></span><br>
-<label for="user">Cognome</label>
-<input type="text" id="lastname" name="lastname" onkeyup= "ValidareCognome(document.reg.lastname)"><span  style="color: white;" id=surname></span><br>
-<label for="user">Indirizzo</label>
-<input type="text" id="indirizzo" name="indirizzo"><br>
-<label for="user">Email</label>
-<input type="text"  id="email" name="email" onkeyup= "ValidareEmail(document.reg.email)"><span style="color: white;" id=span></span><br>
-<label for="user">Password</label>
-<input type="password" id="pass" name="pass" onkeyup= "ValidarePassword(document.reg.pass)"><span style="color: white;" id=psw></span><br>
+<form name="reg" id="form" action="UserAction" method="POST">
+	<label for="user">Nome</label>
+	<input type="text" id="firstname" name="firstname" onkeyup= "ValidareNome(document.reg.firstname)"><span style="color: white;" id=name></span><br>
+	<label for="user">Cognome</label>
+	<input type="text" id="lastname" name="lastname" onkeyup= "ValidareCognome(document.reg.lastname)"><span  style="color: white;" id=surname></span><br>
+	<label for="user">Indirizzo</label>
+	<input type="text" id="indirizzo" name="indirizzo"><br>
+	<label for="user">Email</label>
+	<input type="text"  id="email" name="email" onkeyup="ValidareEmail(document.reg.email)"><span style="color: white;" id=span></span><br>
+	<label for="user">Password</label>
+	<input type="password" id="pass" name="pass" onkeyup= "ValidarePassword(document.reg.pass)"><span style="color: white;" id=psw></span><br>
 
 
-<input type="submit" id="submit" name="submit" value="Registrati"/> <input type="submit" id="login" name="login" value="Ho già un account" onclick="document.reg.action='Accesso.jsp'"/>
+	<input type="submit" id="submit" value="Registrati"> 
+	<input type="hidden" name="action" value="registrazione">
+	<input type="submit" id="login" name="login" value="Ho già un account" onclick="document.reg.action='Accesso.jsp'"/>
 </form>
 		
 
