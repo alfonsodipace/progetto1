@@ -8,7 +8,6 @@
 		<link type="text/css" rel="stylesheet" href="CSS/registrationCSS.css"/>
 		<link rel="icon" href="images/favicon.jpg" />
 		<script src="js/jquery.js"></script> 
-		<script src="js/Validation.js"></script>
 </head>
 
 <body>
@@ -37,7 +36,7 @@
 	<label for="user">Password</label>
 	<input type="password" id="pass" name="pass"><span style="color: white;" id=psw></span><br>
 
-	<input type="submit" id="submit" name="submit" value="Accedi" > 
+	<input type="submit" id="submit" class="submit" name="submit" value="Accedi" > 
 	<input type="hidden" name="action" value="login">
 </form>
 		

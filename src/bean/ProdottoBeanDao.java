@@ -149,7 +149,7 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 
 		Collection<ProdottoBean> prod = new LinkedList<ProdottoBean>();
 
-		String selectSQL = "SELECT * FROM " + ProdottoBeanDao.TABLE_NAME + "WHERE tipo ="+tipo;
+		String selectSQL = "SELECT * FROM " + ProdottoBeanDao.TABLE_NAME + " WHERE tipo ='"+ tipo +"'";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -164,7 +164,7 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 				bean.setTipo(rs.getString("tipo"));
 				bean.setDesc(rs.getString("descrizione"));
 				bean.setPrezzo(rs.getDouble("prezzo"));
-				bean.setDisp(rs.getInt("disponiilita"));
+				bean.setDisp(rs.getInt("disponibilita"));
 				bean.setVenduti(rs.getInt("venduti"));
 				prod.add(bean);
 			}
