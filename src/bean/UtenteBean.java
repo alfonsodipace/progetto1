@@ -7,13 +7,13 @@ public class UtenteBean {
 	private String cognome;
 	private String indirizzo;
 	private String tipo;
-	private boolean state=false;
+	private String state ="non loggato";
 	
 
-	public boolean isState() {
+	public String getState() {
 		return state;
 	}
-	public void setState(boolean state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 	public String getEmail() {

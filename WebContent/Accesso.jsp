@@ -16,16 +16,30 @@
 
 <img id= "logo" src="images/logo.jpeg" style="height: 190px; ">
 
+<% if(session.getAttribute("goodReg").equals("ok")) {%>
+
+<script>
+alert("Registrazione effettuata!");
+</script>
+<%} %>
+
+<% if(session.getAttribute("failedLog").equals("true")) {%>
+
+<script>
+alert("Email o Password non corretti");
+</script>
+<%} %>
+
 <div id="menubar">
 <ul id="menu">
  <li><a href="Home.jsp">Home</a></li>
  <li><a href="">Menù</a></li>
- <li><a href="">Panini</a></li>
+ <li><a href="Panini.jsp">Panini</a></li>
  <li><a href="">Rosticceria</a></li>
- <li><a href="">Dolci</a></li>
  <li><a href="">Bibite</a></li>
- <li><a href="">Info</a></li>
- <li><a href="Registrazione.jsp">Login</a></li>
+ <li><a href="">Dolci</a></li>
+ <li><a href="Registrazione.jsp">Registrati</a></li>
+ 
 </ul>
 </div>
 
@@ -36,7 +50,7 @@
 	<label for="user">Password</label>
 	<input type="password" id="pass" name="pass"><span style="color: white;" id=psw></span><br>
 
-	<input type="submit" id="submit" class="submit" name="submit" value="Accedi" > 
+	<input type="submit" id="submit" name="submit" value="Accedi" > 
 	<input type="hidden" name="action" value="login">
 </form>
 		

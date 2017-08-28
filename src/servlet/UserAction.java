@@ -1,16 +1,15 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import bean.UtenteBean;
 import bean.UtenteBeanDao;
 
@@ -36,11 +35,10 @@ public class UserAction extends HttpServlet {
 		// TODO Auto-generated method stub
 	//	response.getWriter().append("Served at: ").append(request.getContextPath());
 		HttpSession session = request.getSession(); 
-		
+				
 		String action = request.getParameter("action");
-		
-		
-		 									// REGISTRAZIONE //
+	
+								// REGISTRAZIONE //
 		if(action.equals("registrazione")) {
 			
 			UtenteBeanDao dao = new UtenteBeanDao();
@@ -60,18 +58,16 @@ public class UserAction extends HttpServlet {
 				bn.setPass(pass);
 				bn.setTipo("utente");
 				dao.doSave(bn);		
+				session.setAttribute("goodReg", "ok");
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Accesso.jsp");
+				dispatcher.forward(request, response);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			
 		}
-		
-		
 											    // LOGIN //
 		if(action.equals("login")) {
-			
-			PrintWriter out = response.getWriter();
-			
 			String email = request.getParameter("email");
 			String pass = request.getParameter("pass");
 			
@@ -81,26 +77,28 @@ public class UserAction extends HttpServlet {
 			try {
 				bn = dao.doRetrieveByKey(email);
 			} catch (SQLException e) {
-				e.printStackTrace();
+				session.setAttribute("failedLog", "true");
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Accesso.jsp");
+				dispatcher.forward(request, response);	
 			}
-			
+			if(!(bn.equals(null))){
 			if(bn.getPass().equals(pass)) {
-//				out.println("Benvento "+ bn.getNome());
-				bn.setState(true);
+				bn.setState("loggato");
 				session.setAttribute("user", bn);
-				//response.sendRedirect("index.jsp");     da completare
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Home.jsp");
+				dispatcher.forward(request, response);	
+			} else {
+				session.setAttribute("failedLog", "true");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Accesso.jsp");
+			dispatcher.forward(request, response);	
+				}
 			}
-			else
-				out.println("Email o Password errati!");
-			
 		}
 		
-		
-											   	// LOGOUT //
 		if(action.equals("logout")) {
-					
 			session.invalidate();
-			//response.sendRedirect("index.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Home.jsp");
+			dispatcher.forward(request, response);	
 		}
 		
 	}

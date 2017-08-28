@@ -4,12 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 
-	private static final String TABLE_NAME = "Prodotto";
+	private static final String TABLE_NAME = "prodotto";
 
 	@Override
 	public void doSave(ProdottoBean data) throws SQLException {
@@ -56,7 +55,6 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 			preparedStatement.setString(1, nome);
 
 			ResultSet rs = (ResultSet) preparedStatement.executeQuery();
-
 			while (rs.next()) {
 				bean.setNome(rs.getString(1));
 				bean.setTipo(rs.getString(2));
@@ -77,11 +75,11 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 	}
 
 	@Override
-	public Collection<ProdottoBean> doRetrieveAll(String order) throws SQLException {
+	public ArrayList<ProdottoBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		Collection<ProdottoBean> prod = new LinkedList<ProdottoBean>();
+		ArrayList<ProdottoBean> prod = new ArrayList<ProdottoBean>();
 
 		String selectSQL = "SELECT * FROM " + ProdottoBeanDao.TABLE_NAME;
 
@@ -143,11 +141,11 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 	}
 
 	@Override
-	public Collection<ProdottoBean> doRetrieveAllByTipo(String tipo) throws SQLException {
+	public ArrayList<ProdottoBean> doRetrieveAllByTipo(String tipo) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		Collection<ProdottoBean> prod = new LinkedList<ProdottoBean>();
+		ArrayList<ProdottoBean> prod = new ArrayList<ProdottoBean>();
 
 		String selectSQL = "SELECT * FROM " + ProdottoBeanDao.TABLE_NAME + " WHERE tipo ='"+ tipo +"'";
 
@@ -156,10 +154,8 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 			preparedStatement = connection.prepareStatement(selectSQL);
 
 			ResultSet rs = preparedStatement.executeQuery();
-
 			while (rs.next()) {
 				ProdottoBean bean = new ProdottoBean();
-
 				bean.setNome(rs.getString("nomeprodotto"));
 				bean.setTipo(rs.getString("tipo"));
 				bean.setDesc(rs.getString("descrizione"));
@@ -168,6 +164,7 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 				bean.setVenduti(rs.getInt("venduti"));
 				prod.add(bean);
 			}
+			rs.close();
 		} finally {
 			try {
 				if (preparedStatement != null)

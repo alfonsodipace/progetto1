@@ -56,7 +56,11 @@ public class UtenteBeanDao implements UtenteBeanDaoInterface {
 			preparedStatement.setString(1, email);
 
 			ResultSet rs = (ResultSet) preparedStatement.executeQuery();
-
+			rs.first();
+			if(rs.wasNull()){
+				return null;
+			}
+			else{rs.beforeFirst();
 			while (rs.next()) {
 				bean.setEmail(rs.getString(1));
 				bean.setPass(rs.getString(2));
@@ -64,7 +68,7 @@ public class UtenteBeanDao implements UtenteBeanDaoInterface {
 				bean.setCognome(rs.getString(4));
 				bean.setIndirizzo(rs.getString(5));
 				bean.setTipo(rs.getString(6));
-			}
+			}}
 		} finally {
 			try {
 				if (preparedStatement != null)

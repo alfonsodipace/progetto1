@@ -21,12 +21,10 @@
 <ul id="menu">
  <li><a href="Home.jsp">Home</a></li>
  <li><a href="">Menù</a></li>
- <li><a href="">Panini</a></li>
+ <li><a href="Panini.jsp">Panini</a></li>
  <li><a href="">Rosticceria</a></li>
- <li><a href="">Dolci</a></li>
  <li><a href="">Bibite</a></li>
- <li><a href="">Info</a></li>
- <li><a href="Registrazione.jsp">Login</a></li>
+ <li><a href="">Dolci</a></li>
 </ul>
 </div>
 
@@ -52,7 +50,7 @@
 
 </div>
 		
-			
+		
 
 <footer> 
 
