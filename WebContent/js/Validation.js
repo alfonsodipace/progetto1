@@ -54,7 +54,7 @@ function ValidareNome(text) {
 
 
 function ValidareCognome(text) {
-	var user = /^[a-z+A-z]+$/;
+	var user = "^[a-zA-Z\\s]*$";
 	if(text.value.match(user)) {
 		cognome=1;
 		document.getElementById("surname").innerHTML = "";

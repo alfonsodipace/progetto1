@@ -7,7 +7,7 @@ import java.util.Collection;
 
 public class Riempie1BeanDao implements Riempie1BeanDaoInterface {
 																	///	MAYBE WE NEED AUTOINCREMENT VALUE IN DB for store more item
-	private static final String TABLE_NAME = "Riempie1";
+	private static final String TABLE_NAME = "riempie1";
 	
 	@Override
 	public void doSave(Riempie1Bean data) throws SQLException {
@@ -15,7 +15,7 @@ public class Riempie1BeanDao implements Riempie1BeanDaoInterface {
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + Riempie1BeanDao.TABLE_NAME
-				+ " (nome, tipo, idcarrello, email) VALUES (?, ?, ?, ?)";
+				+ " (nome, tipo, idcarrello, email, prezzo) VALUES (?, ?, ?, ?, ?)";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -24,6 +24,7 @@ public class Riempie1BeanDao implements Riempie1BeanDaoInterface {
 			preparedStatement.setString(2, data.getTipo());
 			preparedStatement.setInt(3, data.getIdCarrello());
 			preparedStatement.setString(4, data.getEmail());
+			preparedStatement.setDouble(5, data.getPrezzo());
 			preparedStatement.executeUpdate();
 			connection.commit();
 		} finally {

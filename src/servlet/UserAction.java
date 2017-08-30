@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.*;
+
+import bean.CarrelloBean;
+import bean.CarrelloBeanDao;
 import bean.UtenteBean;
 import bean.UtenteBeanDao;
 
@@ -28,6 +32,24 @@ public class UserAction extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    
+    protected int generaIdCarrello(){
+    	int id =0,i = 0;
+    	CarrelloBeanDao daoCar= new CarrelloBeanDao();
+    	while(i==0)
+    	{
+    	Random r= new Random();
+    	id = r.nextInt(899999)+100000;
+    	try {
+			if(daoCar.doRetrieveById(id))
+				i = 1;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	}
+    	return id;
+    }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -40,7 +62,8 @@ public class UserAction extends HttpServlet {
 	
 								// REGISTRAZIONE //
 		if(action.equals("registrazione")) {
-			
+			CarrelloBeanDao daoCar = new CarrelloBeanDao();
+			CarrelloBean car = new CarrelloBean();
 			UtenteBeanDao dao = new UtenteBeanDao();
 			UtenteBean bn = new UtenteBean();
 			
@@ -49,6 +72,7 @@ public class UserAction extends HttpServlet {
 			String cognome = request.getParameter("lastname");
 			String nome = request.getParameter("firstname");
 			String indirizzo = request.getParameter("indirizzo");
+			int idCar=generaIdCarrello();
 			
 			try {
 				bn.setCognome(cognome);
@@ -58,6 +82,10 @@ public class UserAction extends HttpServlet {
 				bn.setPass(pass);
 				bn.setTipo("utente");
 				dao.doSave(bn);		
+				car.setIdCarrello(idCar);
+				car.setEmail(email);
+				car.setTotale(0);
+				daoCar.doSave(car);
 				session.setAttribute("goodReg", "ok");
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Accesso.jsp");
 				dispatcher.forward(request, response);
@@ -65,7 +93,7 @@ public class UserAction extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		}
+		} else {
 											    // LOGIN //
 		if(action.equals("login")) {
 			String email = request.getParameter("email");
@@ -81,26 +109,27 @@ public class UserAction extends HttpServlet {
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Accesso.jsp");
 				dispatcher.forward(request, response);	
 			}
-			if(!(bn.equals(null))){
-			if(bn.getPass().equals(pass)) {
+			
+			
+			if(!(bn==null)&&(bn.getPass().equals(pass))) {
 				bn.setState("loggato");
 				session.setAttribute("user", bn);
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Home.jsp");
 				dispatcher.forward(request, response);	
-			} else {
+			} else{ 
 				session.setAttribute("failedLog", "true");
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Accesso.jsp");
 			dispatcher.forward(request, response);	
 				}
 			}
-		}
-		
+			else{ 
 		if(action.equals("logout")) {
 			session.invalidate();
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Home.jsp");
 			dispatcher.forward(request, response);	
+			}
 		}
-		
+		}
 	}
 
 	/**

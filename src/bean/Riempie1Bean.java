@@ -6,7 +6,14 @@ public class Riempie1Bean {
 	private String tipo;
 	private int idCarrello;
 	private String email;
+	private double prezzo;
 	
+	public double getPrezzo() {
+		return prezzo;
+	}
+	public void setPrezzo(double prezzo) {
+		this.prezzo = prezzo;
+	}
 	public String getNome() {
 		return nome;
 	}

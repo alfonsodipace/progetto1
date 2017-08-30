@@ -7,8 +7,14 @@ public class ProdottoBean {
 	private double prezzo;
 	private int disp;
 	private int venduti;
+	private String immagine;
 	
-	
+	public String getImmagine() {
+		return immagine;
+	}
+	public void setImmagine(String immagine) {
+		this.immagine = immagine;
+	}
 	public String getNome() {
 		return nome;
 	}

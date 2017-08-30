@@ -1,5 +1,6 @@
 package bean;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,6 +28,7 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 			preparedStatement.setDouble(4, data.getPrezzo());
 			preparedStatement.setInt(5, data.getDisp());
 			preparedStatement.setInt(6, data.getVenduti());
+			preparedStatement.setString(7, data.getImmagine());
 			preparedStatement.executeUpdate();
 
 			connection.commit();
@@ -102,6 +104,7 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 				bean.setPrezzo(rs.getDouble("prezzo"));
 				bean.setDisp(rs.getInt("disponiilita"));
 				bean.setVenduti(rs.getInt("venduti"));
+				bean.setImmagine(rs.getString("immagine"));
 				prod.add(bean);
 			}
 		} finally {
@@ -162,6 +165,7 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 				bean.setPrezzo(rs.getDouble("prezzo"));
 				bean.setDisp(rs.getInt("disponibilita"));
 				bean.setVenduti(rs.getInt("venduti"));
+				bean.setImmagine(rs.getString("immagine"));
 				prod.add(bean);
 			}
 			rs.close();

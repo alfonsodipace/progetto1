@@ -2,16 +2,16 @@ package bean;
 
 public class CarrelloBean {
 
-	private int idMenu;
-	private int idCarrello;
 	private String email;
+	private int idCarrello;
+	private double totale;
 	
 	
-	public int getIdMenu() {
-		return idMenu;
+	public String getEmail() {
+		return email;
 	}
-	public void setIdMenu(int idMenu) {
-		this.idMenu = idMenu;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public int getIdCarrello() {
 		return idCarrello;
@@ -19,10 +19,10 @@ public class CarrelloBean {
 	public void setIdCarrello(int idCarrello) {
 		this.idCarrello = idCarrello;
 	}
-	public String getEmail() {
-		return email;
+	public double getTotale() {
+		return totale;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setTotale(double totale) {
+		this.totale = totale;
 	}
 }

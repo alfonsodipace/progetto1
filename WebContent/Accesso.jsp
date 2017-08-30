@@ -3,19 +3,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<meta  http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>I-PHAME</title>
-		<link type="text/css" rel="stylesheet" href="CSS/registrationCSS.css"/>
+		<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css">
 		<link rel="icon" href="images/favicon.jpg" />
-		<script src="js/jquery.js"></script> 
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<style>
+		
+		h2,a{color:#fff;
+		}
+		
+			footer {
+		color: #fff;
+			font-size: 15px;
+			text-align:center;
+			background-color: #333;
+			padding: 40px 0;
+			margin-top: 40px;
+		}
+		body{background-color: #333;
+			font-size: 18px;
+		}
+		</style>
 </head>
 
 <body>
-
-<div id="all">
-
-<img id= "logo" src="images/logo.jpeg" style="height: 190px; ">
-
+<header class="container">
+	<img class="img-responsive" style="border-radius: 10px 10px 10px 10px;margin-top:4%;" src="images/logo.jpeg">
+</header>
 <% if(session.getAttribute("goodReg").equals("ok")) {%>
 
 <script>
@@ -30,32 +48,51 @@ alert("Email o Password non corretti");
 </script>
 <%} %>
 
-<div id="menubar">
-<ul id="menu">
- <li><a href="Home.jsp">Home</a></li>
- <li><a href="">Menù</a></li>
- <li><a href="Panini.jsp">Panini</a></li>
- <li><a href="">Rosticceria</a></li>
- <li><a href="">Bibite</a></li>
- <li><a href="">Dolci</a></li>
- <li><a href="Registrazione.jsp">Registrati</a></li>
- 
-</ul>
-</div>
+<div id="headerWrap" class="wrap">
+		<header class="container">
+			<nav  id="mainNav" class="navbar" role="navigation">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainMenu">
+						<span style="background-color: #fff;" class="icon-bar"></span>
+						<span style="background-color: #fff;"  class="icon-bar"></span>
+						<span style="background-color: #fff;"  class="icon-bar"></span>
+					</button>
+					<a href="Home.jsp" class="navbar-brand">I-PHAME</a>
+				</div>
+				<div class="collapse navbar-collapse" id="mainMenu">
+						<ul id="menu" class="nav navbar-nav">
+							 <li><a href="Home.jsp">Home</a></li>
+ 							<li><a href="#">Menù</a></li>
+ 							<li><a href="Panini.jsp">Panini</a></li>
+ 							<li><a href="Rosticceria.jsp">Rosticceria</a></li>
+ 							<li><a href="Bibite.jsp">Bibite</a></li>
+ 							<li><a href="Dolci.jsp">Dolci</a></li>
+ 							<li><a href="Registrazione.jsp">Registrati</a></li>
+						</ul>
+				</div>
+			</nav>
+		</header>
+	</div>
 
-	
-<form name="reg" id="form" action="UserAction" method="POST">
-	<label for="user">Email</label>
-	<input type="text"  id="email" name="email" ><span style="color: white;" id=span></span><br>
-	<label for="user">Password</label>
-	<input type="password" id="pass" name="pass"><span style="color: white;" id=psw></span><br>
-
-	<input type="submit" id="submit" name="submit" value="Accedi" > 
-	<input type="hidden" name="action" value="login">
-</form>
+	<div class="container">
+		<h2>Accedi:</h2><br>
+		<form name="reg" id="form" action="UserAction" method="POST">
+			<div class="form-group">
+				<label style="color:#fff;" for="user">Email:</label>
+				<input type="text"  style="width:180px;" id="email" class="form-control" name="email" >
+			</div>
+			<div class="form-group">
+				<label style="color:#fff;" for="user">Password:</label>
+				<input type="password"  style="width:180px;" id="pass" class="form-control" name="pass">
+			</div>
+			<div class="form-group">
+				<input type="submit" id="submit" class="btn btn-default" name="submit" value="Accedi" > 
+				<input type="hidden" name="action" value="login">
+			</div>
+		</form>
+	</div>
 		
 
-</div>
 		
 			
 

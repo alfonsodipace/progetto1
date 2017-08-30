@@ -1,12 +1,13 @@
 <%@page import="bean.ProdottoBeanDao"%>
 <%@page import="bean.ProdottoBean"%>
 <%@ page import="java.util.*" %>
+<%@ page import="javax.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<jsp:useBean id="user" class="bean.UtenteBean" scope="session"/>  
+		<jsp:useBean id="user" class="bean.UtenteBean" scope="session"/>
 		<meta  http-equiv="Content-Type" content="text/html" charset="UTF-8" >
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>I-PHAME</title>
@@ -53,7 +54,7 @@ background-position: center;}
 </head>
 <body>
 <header class="container">
-	<img class="img-responsive" style="border-radius: 10px 10px 10px 10px;" src="images/logo.jpeg">
+	<img class="img-responsive" style="border-radius: 10px 10px 10px 10px;margin-top:4%;" src="images/logo.jpeg">
 </header>
 
 
@@ -71,31 +72,31 @@ background-position: center;}
 				<div class="collapse navbar-collapse" id="mainMenu">
 						<ul id="menu" class="nav navbar-nav">
 							 <li><a href="Home.jsp">Home</a></li>
- 							<li><a href="#">Menù</a></li>
+ 							<li><a href="Menu.jsp">Menù</a></li>
  							<li><a href="Panini.jsp">Panini</a></li>
- 							<li><a href="#">Rosticceria</a></li>
- 							<li><a href="#">Bibite</a></li>
- 							<li><a href="#">Dolci</a></li>
+ 							<li><a href="Rosticceria.jsp">Rosticceria</a></li>
+ 							<li><a href="Bibite.jsp">Bibite</a></li>
+ 							<li><a href="Dolci.jsp">Dolci</a></li>
  								<% 
 									if (user.getState().equals("loggato")) { %>
-	 								<li><a>Il mio account</a></li>
+	 								<li><a href="#">Il mio account</a></li>
 	 								
             								<li><a href="#">Carrello</a></li>
             								<li><a href="#">I miei ordini</a></li>
-            								<li><a href="logout.jsp">Logout</a></li>
+            								<li><a href="${pageContext.request.contextPath}/UserAction?action=logout">Logout</a></li>
         								
  									<% } else { %>
  								<li><a href="Registrazione.jsp">Login</a></li>
 								<% } %>
 						</ul>
 				</div>
-			</nav>
+			</nav>${pageContext.request.contextPath}/CarrelloBeanDao?prezzo=
 		</header>
 	</div>
 	
 		<div class="container">
 		<div class="row" id="services">
-		<form action="">
+		<form id="reg" action="CarrelloAction">
 					<%!ProdottoBeanDao  dao = new ProdottoBeanDao(); 
 						ArrayList<ProdottoBean> userList = new ArrayList<ProdottoBean>();%>
 
@@ -104,10 +105,16 @@ background-position: center;}
 						for (ProdottoBean s : userList) { %>                 
   					<div class="col-md-4 text-center" >
 					<div class="service">
-					<span style="color: white;" class="span"><% out.println(s.getNome()); %></span>
-        				<a href=""><img class="img-responsive" src="images/panino.jpeg" alt="icon" /></a> <br> <!-- serve-invece -->
+					<span style="color: white;" id="nome"class="span"><% out.print(s.getNome()); %></span>
+        				<a href=""><img class="img-responsive" style="border-radius:10px;" src="<%out.print(s.getImmagine());%>"/></a> <br> 
+        				<input type="hidden" name="prezzo" value=<% out.print(s.getPrezzo());%>>
+        				<input type="hidden" name="tipo" value="panino">
+        				<input type="hidden" name="email" value=<% out.print(user.getEmail());%>>
+        				<input type="hidden" name="nome" value=<% out.print(s.getNome()); %>>
+        				<span style="color: white;" class="span"><% out.print(s.getDesc()); %></span><br>
+        				<span style="color: white;" class="span">€ &nbsp;<% out.print(s.getPrezzo());%> &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;</span>
         				<input type="submit" id="submit" class="button" name="submit" value=""> 
-	    				<input type="hidden" name="action" value="aggiungiCarrello">
+	    				<input type="hidden" name="action" value="aggiungi">
 					</div>
 				</div>
   							<% } %>

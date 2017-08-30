@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
+<%@ page import="javax.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,13 +41,15 @@
 			padding: 40px 0;
 			margin-top: 40px;
 		}
+		
+		#headerWrap{margin-top:0%;}
 	</style>
 </head>
 	<% session.setAttribute("goodReg","no"); %>
 	<% session.setAttribute("failedLog","false"); %>
 <body>
 <header class="container">
-	<img class="img-responsive" style="border-radius: 10px 10px 10px 10px;" src="images/logo.jpeg">
+	<img class="img-responsive" style="border-radius: 10px 10px 10px 10px;margin-top:4%;" src="images/logo.jpeg">
 </header>
 
 
@@ -63,18 +67,18 @@
 				<div class="collapse navbar-collapse" id="mainMenu">
 						<ul id="menu" class="nav navbar-nav">
 							 <li><a href="Home.jsp">Home</a></li>
- 							<li><a href="#">Menù</a></li>
+ 							<li><a href="Menu.jsp">Menù</a></li>
  							<li><a href="Panini.jsp">Panini</a></li>
- 							<li><a href="#">Rosticceria</a></li>
- 							<li><a href="#">Bibite</a></li>
- 							<li><a href="#">Dolci</a></li>
+ 							<li><a href="Rosticceria.jsp">Rosticceria</a></li>
+ 							<li><a href="Bibite.jsp">Bibite</a></li>
+ 							<li><a href="Dolci.jsp">Dolci</a></li>
  								<% 
 									if (user.getState().equals("loggato")) { %>
-	 								<li><a>Il mio account</a></li>
+	 								<li><a href="#">Il mio account</a></li>
 	 								
             								<li><a href="#">Carrello</a></li>
             								<li><a href="#">I miei ordini</a></li>
-            								<li><a href="logout.jsp">Logout</a></li>
+            								<li><a href="${pageContext.request.contextPath}/UserAction?action=logout">Logout</a></li>
         								
  									<% } else { %>
  								<li><a href="Registrazione.jsp">Login</a></li>
@@ -123,8 +127,8 @@
 			<div class="row" id="services">
 				<div class="col-md-3 text-center" >
 					<div class="service">
-						<i class="fa fa-facebook-square fa-4x" aria-hidden="true"></i>
-						<a href="https://www.facebook.com/iPhameFisciano"><h3>Seguici su facebook</h3></a>
+					<a href="https://www.facebook.com/iPhameFisciano"><i class="fa fa-facebook-square fa-4x" aria-hidden="true"></i></a>
+						<h3>Seguici su facebook</h3>
 					</div>
 				</div>
 				<div class="col-md-3 text-center" >
