@@ -5,8 +5,15 @@ public class PagamentoBean {
 	private int idPagamento;
 	private int idCarrello;
 	private String dataAcquisto;
+	private String email;
 	
-	
+
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public int getIdPagamento() {
 		return idPagamento;
 	}

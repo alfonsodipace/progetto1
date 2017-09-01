@@ -1,0 +1,19 @@
+h2, h3 ,a , p ,span {
+	color:#fff;
+}
+
+.container { }
+
+body {
+	background-color: #333;
+	font-size: 18px;
+}
+
+footer {
+	color: #fff;
+	font-size: 15px;
+	text-align:center;
+	background-color: #333;
+	padding: 40px 0;
+	margin-top: 40px;
+}

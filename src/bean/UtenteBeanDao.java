@@ -16,7 +16,7 @@ public class UtenteBeanDao implements UtenteBeanDaoInterface {
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + UtenteBeanDao.TABLE_NAME
-				+ " (email, pass, nome, cognome, indirizzo, tipo) VALUES (?, ?, ?, ?, ?, ?)";
+				+ " (email, pass, nome, cognome, indirizzo, tipo, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -27,6 +27,7 @@ public class UtenteBeanDao implements UtenteBeanDaoInterface {
 			preparedStatement.setString(4, data.getCognome());
 			preparedStatement.setString(5, data.getIndirizzo());
 			preparedStatement.setString(6, data.getTipo());
+			preparedStatement.setString(7, data.getTelefono());
 			preparedStatement.executeUpdate();
 
 			connection.commit();
@@ -68,6 +69,7 @@ public class UtenteBeanDao implements UtenteBeanDaoInterface {
 				bean.setCognome(rs.getString(4));
 				bean.setIndirizzo(rs.getString(5));
 				bean.setTipo(rs.getString(6));
+				bean.setTelefono(rs.getString(7));
 			}}
 		} finally {
 			try {
@@ -86,6 +88,33 @@ public class UtenteBeanDao implements UtenteBeanDaoInterface {
 		return null;
 	}
 
-
+	@Override
+	public void doUpdate (UtenteBean data) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		String updateSQL = "UPDATE " + UtenteBeanDao.TABLE_NAME + " SET  nome = ?, cognome = ?, indirizzo = ?, telefono = ? WHERE email = ?";
+		
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = (PreparedStatement) connection.prepareStatement(updateSQL);
+			preparedStatement.setString(1, data.getNome());
+			preparedStatement.setString(2, data.getCognome());
+			preparedStatement.setString(3, data.getIndirizzo());
+			preparedStatement.setString(4, data.getTelefono());
+			preparedStatement.setString(5, data.getEmail());
+			preparedStatement.executeUpdate();
+			connection.commit();
+		} 
+		finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+		connection.close();
+	}
 
 }

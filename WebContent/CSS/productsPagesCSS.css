@@ -1,110 +1,46 @@
-@CHARSET "UTF-8";
-
-@media only screen and (min-width: 360px) {
-	
-	h2, h3,p.desc{font-family: Verdana, sans-serif; text-align:center; color:white;font-size: 15px;}
-
-	body{background-color: #2e3436;}
-
-	footer{color:white; background-color: #2e3436;font-size: 13px; text-align:center}
-	
-	#menubar{float: left;width: 100%;}
-	
-	#all {width: 90%; margin:auto; background-color: #2e3436;}
-	
-	#logo{ width: 100%; margin: auto;  border-radius: 10px 10px 10px 10px;}
-	
-	ul#menu {font-family: Verdana, sans-serif; font-size: 15px;  list-style: none; margin: auto;}
- 
-	ul#menu li {background-color: #204a87; border-bottom: 5px solid #888a85; margin: 0.5em; width: 10,25%; border-radius: 10px 10px 10px 10px;
-	margin-left: -30px;}
-
-	ul#menu li a { color: #fff; display: inline-block; font-weight: bold; line-height: 30px; text-decoration: none; width: 150px; height: 30px; text-align: center;}	
-	
-	label{font-weight: bold; float: left; height: 40px; width: 100px; color: #fff; font-size:15px;}
-	
-	input{height:30px; border-radius: 10px 10px 10px 10px; width: 120px; margin-bottom: 5px;}
-	
-
-
-	
-@media only screen and (min-width: 768px) {
-	
-	
-.body{
-	display: block
+.service {
+	background-color: #333;
+	color: #fff;
+	padding: 15px;
+	margin-top: 20px;
+	border-radius: 5px;
+}
+		
+h2,h3,a ,span {
+	text-align: center;
+	color:#fff;
 }
 
-.service-list {
-width: 30%;  
-height: 10%;
-list-style-type: none;
-margin-top: 40px;
-margin-right:40px;
-margin-left:0px;
-padding-left:0px;
-display: inline-block;
+.container{ }
+
+a:hover {
+	color:#9d9d9d;
 }
 
-.service-list img {
-border-radius: 10px 10px 10px 10px;
-width: 60%;  
-height: 30%;
-/* float:left; */
+body {
+	background-color: #333;
+	font-size: 18px;
 }
 
-.service-list span {
-font-size: 26pt;
-width: 48%;  
-color: white;
-margin-top: 4;
-text-align: center; 
-display: inline-block;
-padding: 4;
+#imgproduct {
+	border-radius: 10px 10px 10px 10px;
 }
 
-
-.button {
-	margin-top: 0;
-	width: 2.3em;  
-	height: 2.3em;
-	font-size: 16px;
-    transition-duration: 0.4s; /* Safari */
+#submit {
+	width:42px;
+	height: 42px;
+	color:#333;
+	background-color:#333;
+	background-image: url('../images/1600.png');
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
-.button:hover {
-    background-color: #4CAF50; /* Green */
-    color: white;
-}
-
-
-br{
-clear: left;
-}
-
-	
-	h2, h3,p.desc{font-family: Verdana, sans-serif; text-align:center; color:white;font-size: 20px; }
-
-	body{background-color: #2e3436;}
-
-	footer{color:white; background-color: #2e3436;font-size: 13px; text-align:center; margin-top:8%;}
-	
-	#menubar{float: left;margin:auto;width: 100%; border-radius: 0px 0px 10px 10px;}
-	
-	#all {width: 75%; margin:auto; background-color: #2e3436;}
-
-	ul#menu {font-family: Verdana, sans-serif; font-size: 15px;  list-style: none; margin: auto;}
- 
-	ul#menu li {background-color: #204a87; border-bottom: 5px solid #888a85; margin: 5px; width: 10,25%; float:left; border-radius: 10px 10px 10px 10px;
-	margin-left: 15px;}
-
-	ul#menu li a { color: #fff; display: inline-block; font-weight: bold; line-height: 30px; text-decoration: none; width: 160px; height: 35px; text-align: center;}
-
-	#logo{ width: 100%; margin: auto; border-radius: 10px 10px 10px 10px;}
-
-	#section-home{width: 100%; background-color: #2e3436; overflow:auto; text-align:center;}
-	
-	#section-home  div {float:left; width: 50%}
-	
-	.img-home{width: 93%; border-radius: 10px 10px 10px 10px;}
+footer {
+	color: #fff;
+	font-size: 15px;
+	text-align:center;
+	background-color: #333;
+	padding: 40px 0;
+	margin-top: 40px;
 }

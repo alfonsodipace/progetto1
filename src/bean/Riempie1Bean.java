@@ -7,6 +7,8 @@ public class Riempie1Bean {
 	private int idCarrello;
 	private String email;
 	private double prezzo;
+	private int idProdotto;
+	
 	
 	public double getPrezzo() {
 		return prezzo;
@@ -37,5 +39,11 @@ public class Riempie1Bean {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public int getIdProdotto() {
+		return idProdotto;
+	}
+	public void setIdProdotto(int idProdotto) {
+		this.idProdotto = idProdotto;
 	}
 }

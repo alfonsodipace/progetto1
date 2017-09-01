@@ -1,42 +1,17 @@
-@CHARSET "UTF-8";
+ h2, a {
+ 	color:#fff;
+}
+		
+footer {
+	color: #fff;
+	font-size: 15px;
+	text-align:center;
+	background-color: #333;	
+	padding: 40px 0;
+	margin-top: 40px;
+}
 
-/*@media only screen and (min-width: 360px) {
-	
-}*/
-
-
-	
-@media only screen and (min-width: 768px) {
-	
-	label{font-weight: bold; float: left; height: 80px; width: 140px; color: #fff; font-size:25px;}
-    
-    input{height:30px; font-size:20px; border-radius: 10px 10px 10px 10px; width: 180px; margin-bottom: 5px;}
-
-	#login{margin-left: 5%;}
-
-	#submit{margin-left: 0%; }
-
-	#submit, #login{font-size:15px; color: white; background-color: #204a87; margin-top: 5px; width: 140px;}
-
-	br{clear: left;}
-
-	#form{ margin-top:8%; margin-left:40%;}	
-
-	body{background-color: #2e3436;}
-
-	footer{color:white; background-color: #2e3436;font-size: 13px; text-align:center; margin-top:8%;}
-	
-	#menubar{float: left;margin:auto;width: 100%; border-radius: 0px 0px 10px 10px;}
-	
-	#all {width: 75%; margin:auto; background-color: #2e3436;}
-
-	ul#menu {font-family: Verdana, sans-serif; font-size: 15px;  list-style: none; margin: auto;}
- 
-	ul#menu li {background-color: #204a87; border-bottom: 5px solid #888a85; margin: 5px; width: 10,25%; float:left; border-radius: 10px 10px 10px 10px;
-	margin-left: 15px;}
-
-	ul#menu li a { color: #fff; display: inline-block; font-weight: bold; line-height: 30px; text-decoration: none; width: 160px; height: 35px; text-align: center;}
-
-	#logo{ width: 100%; margin: auto; border-radius: 10px 10px 10px 10px;}
-
+body { 
+	background-color: #333;
+	font-size: 18px;
 }

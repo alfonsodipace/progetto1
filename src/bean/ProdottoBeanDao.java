@@ -26,9 +26,8 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 			preparedStatement.setString(2, data.getTipo());
 			preparedStatement.setString(3, data.getDesc());
 			preparedStatement.setDouble(4, data.getPrezzo());
-			preparedStatement.setInt(5, data.getDisp());
-			preparedStatement.setInt(6, data.getVenduti());
-			preparedStatement.setString(7, data.getImmagine());
+			preparedStatement.setInt(5, data.getVenduti());
+			preparedStatement.setString(6, data.getImmagine());
 			preparedStatement.executeUpdate();
 
 			connection.commit();
@@ -62,8 +61,9 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 				bean.setTipo(rs.getString(2));
 				bean.setDesc(rs.getString(3));
 				bean.setPrezzo(rs.getDouble(4));
-				bean.setDisp(rs.getInt(5));
-				bean.setVenduti(rs.getInt(6));
+				bean.setVenduti(rs.getInt(5));
+				bean.setImmagine(rs.getString(6));
+				bean.setIdProdotto(rs.getInt("idProdotto"));
 			}
 		} finally {
 			try {
@@ -102,9 +102,9 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 				bean.setTipo(rs.getString("tipo"));
 				bean.setDesc(rs.getString("descrizione"));
 				bean.setPrezzo(rs.getDouble("prezzo"));
-				bean.setDisp(rs.getInt("disponiilita"));
 				bean.setVenduti(rs.getInt("venduti"));
 				bean.setImmagine(rs.getString("immagine"));
+				bean.setIdProdotto(rs.getInt("idProdotto"));
 				prod.add(bean);
 			}
 		} finally {
@@ -163,9 +163,9 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 				bean.setTipo(rs.getString("tipo"));
 				bean.setDesc(rs.getString("descrizione"));
 				bean.setPrezzo(rs.getDouble("prezzo"));
-				bean.setDisp(rs.getInt("disponibilita"));
 				bean.setVenduti(rs.getInt("venduti"));
 				bean.setImmagine(rs.getString("immagine"));
+				bean.setIdProdotto(rs.getInt("idProdotto"));
 				prod.add(bean);
 			}
 			rs.close();

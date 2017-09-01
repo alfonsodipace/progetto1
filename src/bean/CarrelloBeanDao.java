@@ -127,9 +127,60 @@ public class CarrelloBeanDao implements CarrelloBeanDaoInterface {
 	}
 
 	@Override
-	public CarrelloBean doRetrieveByEmail(String nome) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public CarrelloBean doRetrieveByEmail(String email) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		CarrelloBean bean = new CarrelloBean();
+
+		String selectSQL = "SELECT * FROM " + CarrelloBeanDao.TABLE_NAME + " WHERE email = ?";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = (PreparedStatement) connection.prepareStatement(selectSQL);
+			preparedStatement.setString(1, email);
+
+			ResultSet rs = (ResultSet) preparedStatement.executeQuery();
+			while(rs.next()){
+				bean.setEmail(rs.getString(2));
+				bean.setIdCarrello(rs.getInt(1));
+				bean.setTotale(rs.getDouble(3));
+			}
+		}
+		
+		finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+		return bean;
+	}
+
+	@Override
+	public void doUpdate(int idCarrello, double tot) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		String updateSQL = "UPDATE " + CarrelloBeanDao.TABLE_NAME + " SET totale = ? WHERE idcarrello= ?";
+		
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = (PreparedStatement) connection.prepareStatement(updateSQL);
+			preparedStatement.setDouble(1, tot);
+			preparedStatement.setInt(2, idCarrello);
+			preparedStatement.executeUpdate(); 
+			connection.commit();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+		
 	}
 
 }

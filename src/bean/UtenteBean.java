@@ -7,8 +7,10 @@ public class UtenteBean {
 	private String cognome;
 	private String indirizzo;
 	private String tipo;
+	private String telefono;
 	private String state ="non loggato";
 	
+	public UtenteBean() { }
 
 	public String getState() {
 		return state;
@@ -52,7 +54,10 @@ public class UtenteBean {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-
-	
-
+	public String getTelefono() {
+		return telefono;
+	}
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
 }

@@ -5,9 +5,9 @@ public class ProdottoBean {
 	private String tipo;
 	private String desc;
 	private double prezzo;
-	private int disp;
 	private int venduti;
 	private String immagine;
+	private int idProdotto;
 	
 	public String getImmagine() {
 		return immagine;
@@ -39,16 +39,17 @@ public class ProdottoBean {
 	public void setPrezzo(double prezzo) {
 		this.prezzo = prezzo;
 	}
-	public int getDisp() {
-		return disp;
-	}
-	public void setDisp(int disp) {
-		this.disp = disp;
-	}
 	public int getVenduti() {
 		return venduti;
 	}
 	public void setVenduti(int venduti) {
 		this.venduti = venduti;
 	}
+	public int getIdProdotto() {
+		return idProdotto;
+	}
+	public void setIdProdotto(int idProdotto) {
+		this.idProdotto = idProdotto;
+	}
+	
 }
