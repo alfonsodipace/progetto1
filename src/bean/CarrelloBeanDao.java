@@ -16,14 +16,13 @@ public class CarrelloBeanDao implements CarrelloBeanDaoInterface {
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + CarrelloBeanDao.TABLE_NAME
-				+ " (idcarrello, email, totale) VALUES (?, ?, ?)";
+				+ " (idcarrello, email) VALUES (?, ?)";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = (PreparedStatement) connection.prepareStatement(insertSQL);
 			preparedStatement.setString(2, data.getEmail());
 			preparedStatement.setInt(1, data.getIdCarrello());
-			preparedStatement.setDouble(3, data.getTotale());
 			preparedStatement.executeUpdate();
 			connection.commit();
 		} finally {
@@ -131,7 +130,7 @@ public class CarrelloBeanDao implements CarrelloBeanDaoInterface {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		CarrelloBean bean = new CarrelloBean();
-
+ 
 		String selectSQL = "SELECT * FROM " + CarrelloBeanDao.TABLE_NAME + " WHERE email = ?";
 
 		try {
@@ -143,7 +142,6 @@ public class CarrelloBeanDao implements CarrelloBeanDaoInterface {
 			while(rs.next()){
 				bean.setEmail(rs.getString(2));
 				bean.setIdCarrello(rs.getInt(1));
-				bean.setTotale(rs.getDouble(3));
 			}
 		}
 		
@@ -158,29 +156,5 @@ public class CarrelloBeanDao implements CarrelloBeanDaoInterface {
 		return bean;
 	}
 
-	@Override
-	public void doUpdate(int idCarrello, double tot) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-
-		String updateSQL = "UPDATE " + CarrelloBeanDao.TABLE_NAME + " SET totale = ? WHERE idcarrello= ?";
-		
-		try {
-			connection = DriverManagerConnectionPool.getConnection();
-			preparedStatement = (PreparedStatement) connection.prepareStatement(updateSQL);
-			preparedStatement.setDouble(1, tot);
-			preparedStatement.setInt(2, idCarrello);
-			preparedStatement.executeUpdate(); 
-			connection.commit();
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				DriverManagerConnectionPool.releaseConnection(connection);
-			}
-		}
-		
-	}
 
 }

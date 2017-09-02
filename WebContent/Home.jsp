@@ -15,9 +15,8 @@
 	<link rel="icon" href="images/favicon.jpg" />
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	<%session.setAttribute("acquistato", "no"); %>
 </head>
-	<% session.setAttribute("goodReg","no");
-	   session.setAttribute("failedLog","false"); %>
 <body>
 <header class="container">
 	<img class="img-responsive" style="border-radius: 10px 10px 10px 10px;margin-top:4%;" src="images/logo.jpeg">
@@ -47,11 +46,11 @@
 							if(user.getTipo().equals("utente")) { %>
 								<li><a href="MyAccount.jsp">Il mio account</a></li>
 								<li><a href="Carrello.jsp">Carrello</a></li>
-       							<li><a href="#">I miei ordini</a></li>
+       							<li><a href="MyOrders.jsp">I miei ordini</a></li>
        							<li><a href="${pageContext.request.contextPath}/UserAction?action=logout">Logout</a></li>	
 						<% } else { %> 
 								<li><a href="#">Gestisci ordini</a></li>
-								<li><a href="#">Aggiungi Prodotto</a></li>
+								<li><a href="AddProdotto.jsp">Aggiungi Prodotto</a></li>
 								<li><a href="${pageContext.request.contextPath}/UserAction?action=logout">Logout</a></li>
 							<% } 
 						} else { %>
@@ -81,7 +80,7 @@
 		<div class="carousel-inner" style="background-color: #333; border-radius:10px;">
 			<div class="item active">
 				<h2 style="text-align:center;">SCOPRI IL PIU' VENDUTO </h2>
-				<img class="img-responsive" src="images/panino.jpeg" >
+				<a href="piuVenduto.jsp"><img class="img-responsive" src="images/panino.jpeg"  ></a>
 			</div>
 			<div class="item">
 				<h2 style="text-align:center;"> LAVORA CON NOI </h2>

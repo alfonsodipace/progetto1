@@ -43,7 +43,7 @@
 					<li><a href="Dolci.jsp">Dolci</a></li>
 					<li><a href="MyAccount.jsp">Il mio account</a></li>		
        				<li><a href="Carrello.jsp">Carrello</a></li>
-       				<li><a href="#">I miei ordini</a></li>
+       				<li><a href="MyOrders.jsp">I miei ordini</a></li>
        				<li><a href="${pageContext.request.contextPath}/UserAction?action=logout">Logout</a></li>			
 				</ul>
 			</div>
@@ -53,7 +53,7 @@
 	
 <div class="container">
 	<form name="frm" action="UserAction" method="post">
-		<label style="color:#fff;">Email: </label>&nbsp; &nbsp;<input type="text" name="emai" class="comment" value="<%=user.getEmail()%>" disabled> <!-- non si può modificare perchè ID -->
+		<label style="color:#fff;">Email: </label>&nbsp; &nbsp;<input type="text" name="emai" value="<%=user.getEmail()%>" disabled> 
 		<br>
 		<br>
 		<label style="color:#fff;">Nome:</label>&nbsp; &nbsp; <input type="text" name="firstname" class="comment" value="<%=user.getNome()%>" disabled> 

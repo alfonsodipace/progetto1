@@ -13,7 +13,7 @@
 	<title>I-PHAME</title>
 	<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="CSS/productsPagesCSS.css"/>
+	 <link rel="stylesheet" type="text/css" href="CSS/productsPagesCSS.css"/> 
 	<link rel="icon" href="images/favicon.jpg" />
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
@@ -67,14 +67,13 @@
 		</nav>
 	</header>
 </div>
-	
+
 <div class="container">
 	<div class="row" id="services">
-	<%! ProdottoBeanDao  dao = new ProdottoBeanDao(); 
-		ArrayList<ProdottoBean> userList = new ArrayList<ProdottoBean>();%>
-	<%		
-		userList = dao.doRetrieveAllByTipo("panino");
-		for (ProdottoBean s : userList) { %>    
+	<%! ProdottoBeanDao  dao = new ProdottoBeanDao(); %>
+	<%	
+		ProdottoBean s = dao.paninoVenduto();
+		 { %>    
 		
 			<form  action="CarrelloAction" method="get">             
 				<div class="col-md-4 text-center" >
@@ -96,11 +95,7 @@
 	<% } %>
 	</div>
 </div>
-	
-<footer> 
-	©2017 Authors Daniele Palmieri, Alfonso di Pace, Marco Amorosi
-</footer>	
 
 </body>
-
 </html>
+

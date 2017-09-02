@@ -12,10 +12,9 @@
 	<link rel="stylesheet" type="text/css" href="CSS/registrationCSS.css"/>
 	<link rel="icon" href="images/favicon.jpg" />
 	<script src="js/jquery-3.2.1.min.js"></script>
-	<script src="js/Validation.js"></script>
+	<!-- <script src="js/Validation.js"></script> -->
 	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-	<% session.setAttribute("goodReg","no");
-	   session.setAttribute("failedLog","false"); %>
+	
 </head>
 
 <body>
@@ -51,36 +50,36 @@
 </div>
 
 <div class="container">
-	<h2>Registrati:</h2>
-	<form name="reg" id="form" action="UserAction" method="POST">
+	<h2>Aggiungi un prodotto:</h2>
+	<form name="reg" id="form" action="AdminAction" enctype="multipart/form-data" method="get">
+ 		<input type="hidden" name="email" value=<% out.print(user.getEmail());%>>
+		<div class="form-group">
+		<select name="tipo">
+			<option value="panino">Panino</option>
+			<option value="rosticceria">Rosticceria</option>
+			<option value="bibita">Bibita</option>
+			<option value="dolce">Dolce</option>
+		</select>
+		</div>
 		<div class="form-group">
 			<label style="color:#fff" for="user">Nome:</label><br>
-			<input type="text" id="firstname" name="firstname" onkeyup= "ValidareNome(document.reg.firstname)"><span style="color: white;" id=name></span>
+			<input type="text" id="nomeProdotto" name="nomeProdotto" ><span style="color: white;" id=name></span>
 		</div>
 		<div class="form-group">
-			<label style="color:#fff" for="user">Cognome:</label><br>
-			<input type="text" id="lastname" name="lastname" onkeyup= "ValidareCognome(document.reg.lastname)"><span  style="color: white;" id=surname></span><br>
+			<label style="color:#fff" for="user">Descrizione:</label><br>
+			<input type="text" id="descrizione" name="descrizione" ><span  style="color: white;" id=surname></span><br>
 		</div>
 		<div class="form-group">
-			<label style="color:#fff" for="user">Indirizzo:</label><br>
-			<input type="text" id="indirizzo" name="indirizzo">
+			<label style="color:#fff" for="user">Prezzo:</label><br>
+			<input type="text" id="pezzo" name="prezzo">
 		</div>
 		<div class="form-group">
-			<label style="color:#fff"  for="user">Telefono:</label><br>
-			<input type="text"  id="telefono" name="telefono" >
-		</div>
+		<input type="file" class="btn btn-default" name="attach"> 
+ 		 <input type="reset" class="btn btn-default" value="reset" >
+ 		 </div>	
 		<div class="form-group">
-			<label style="color:#fff"  for="user">Email:</label><br>
-			<input type="text"  id="email" name="email" onkeyup="ValidareEmail(document.reg.email)"><span style="color: white;" id=span></span>
-		</div>
-		<div class="form-group">
-			<label style="color:#fff" for="user">Password:</label><br>
-			<input type="password" id="pass" name="pass" onkeyup= "ValidarePassword(document.reg.pass)"><span style="color: white;" id=psw></span>
-		</div>
-		<div class="form-group">
-			<input type="submit" id="submit" class="btn btn-default" name="submit" value="Registrati" > 
-			<input type="hidden" name="action" value="registrazione">
-			<input type="submit" id="login" name="login" class="btn btn-default" value="Ho già un account" onclick="document.reg.action='Accesso.jsp'"/>
+			<input type="submit" id="submit" class="btn btn-default" name="submit" value="INVIA" > 
+			<input type="hidden" name="action" value="aggiungiProdotto">
 		</div>
 	</form>
 </div>

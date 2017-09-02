@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Date;
 
 public class PagamentoBeanDao implements PagamentoBeanDaoInterface {
 
@@ -15,13 +16,14 @@ public class PagamentoBeanDao implements PagamentoBeanDaoInterface {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		String insertSQL = "INSERT INTO " + PagamentoBeanDao.TABLE_NAME+ " (idcarrello, email) VALUES (?, ?)";
+		String insertSQL = "INSERT INTO " + PagamentoBeanDao.TABLE_NAME+ " (idcarrello, dataacquisto, email) VALUES (?,?, ?)";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = (PreparedStatement) connection.prepareStatement(insertSQL);
 			preparedStatement.setInt(1, data.getIdCarrello());
-			preparedStatement.setString(2, data.getEmail());
+			preparedStatement.setDate(2, new java.sql.Date(new Date().getTime()));
+			preparedStatement.setString(3, data.getEmail());
 			preparedStatement.executeUpdate();
 			connection.commit();
 		} finally {

@@ -11,6 +11,7 @@ public interface PagamentoBeanDaoInterface {
 	
 	public PagamentoBean doRetrieveByKey(String idpagamento) throws SQLException;
 	
+
 	
 	public Collection<PagamentoBean> doRetrieveAll(String order) throws SQLException;
 	

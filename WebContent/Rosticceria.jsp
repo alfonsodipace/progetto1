@@ -52,11 +52,11 @@
 							if(user.getTipo().equals("utente")) { %>
 								<li><a href="MyAccount.jsp">Il mio account</a></li>
 								<li><a href="Carrello.jsp">Carrello</a></li>
-       							<li><a href="#">I miei ordini</a></li>
+       							<li><a href="MyOrders.jsp">I miei ordini</a></li>
        							<li><a href="${pageContext.request.contextPath}/UserAction?action=logout">Logout</a></li>	
 						<% } else { %> 
 								<li><a href="#">Gestisci ordini</a></li>
-								<li><a href="#">Aggiungi Prodotto</a></li>
+								<li><a href="AddProdotto.jsp">Aggiungi Prodotto</a></li>
 								<li><a href="${pageContext.request.contextPath}/UserAction?action=logout">Logout</a></li>
 							<% } 
 						} else { %>
@@ -82,14 +82,14 @@
 						<span style="color: white;" id="nome"class="span"><% out.print(s.getNome()); %></span>
    						<a href=""><img class="img-responsive" style="border-radius:10px;" src="<%out.print(s.getImmagine());%>"/></a><br> 
    						<input type="hidden" name="prezzo" value=<%out.print(s.getPrezzo());%>>
-   						<input type="hidden" name="tipo" value="bibita">
+   						<input type="hidden" name="tipo" value="rosticceria">
    						<input type="hidden" name="email" value=<% out.print(user.getEmail());%>>
    						<input type="hidden" name="nome" value="<% out.print(s.getNome()); %>">
    						<input type="hidden" name="idprodotto" value=<% out.print(s.getIdProdotto()); %>>
    						<input type="hidden" name="action" value="aggiungi">
    						<span style="color: white;" class="span"><% out.print(s.getDesc()); %></span><br>
    						<span style="color: white;" class="span">€ &nbsp;<% out.print(s.getPrezzo());%> &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;</span>
-   						<input type="submit" id="submit" class="button" name="submit" onclick="alert('Prodotto aggiunto al carrello!')" disabled> 
+   						<input type="submit" id="submit" class="button" name="submit" onclick="alert('Prodotto aggiunto al carrello!')"> 
 					</div>
 				</div>
 			</form>

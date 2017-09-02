@@ -45,10 +45,10 @@ public class AjaxController extends HttpServlet {
 			bn1 = dao.doRetrieveByKey(email);
 
 			if(email.equals(bn1.getEmail())) {
-				out.print(" email gia' in uso");
+				out.print(" not avaiable");
 			}
 			else {
-				out.print(" disponobile");		
+				out.print(" avaiable");		
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

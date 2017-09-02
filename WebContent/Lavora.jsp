@@ -47,11 +47,11 @@
 							if(user.getTipo().equals("utente")) { %>
 								<li><a href="MyAccount.jsp">Il mio account</a></li>
 								<li><a href="Carrello.jsp">Carrello</a></li>
-       							<li><a href="#">I miei ordini</a></li>
+       							<li><a href="MyOrders">I miei ordini</a></li>
        							<li><a href="${pageContext.request.contextPath}/UserAction?action=logout">Logout</a></li>	
 						<% } else { %> 
 								<li><a href="#">Gestisci ordini</a></li>
-								<li><a href="#">Aggiungi Prodotto</a></li>
+								<li><a href="AddProdotto.jsp">Aggiungi Prodotto</a></li>
 								<li><a href="${pageContext.request.contextPath}/UserAction?action=logout">Logout</a></li>
 							<% } 
 						} else { %>

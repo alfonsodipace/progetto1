@@ -9,6 +9,8 @@ public interface ProdottoBeanDaoInterface {
 
 	public void doDelete(ProdottoBean data) throws SQLException;
 	
+	public void doUpdate (String imageURL) throws SQLException;
+	
 	public ProdottoBean doRetrieveByKey(String nome) throws SQLException;
 	
 	public Collection<ProdottoBean> doRetrieveAllByTipo(String tipo) throws SQLException;

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 
-	private static final String TABLE_NAME = "prodotto";
+	private static final String TABLE_NAME = "prodotto"; 
 
 	@Override
 	public void doSave(ProdottoBean data) throws SQLException {
@@ -17,7 +17,7 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + ProdottoBeanDao.TABLE_NAME
-				+ " (nome, Tipo, Desc, Prezzo, Disp, Venduti) VALUES (?, ?, ?, ?, ?, ?)";
+				+ " (nomeprodotto, Tipo, Descrizione, Prezzo) VALUES (?, ?, ?, ?)";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -26,10 +26,7 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 			preparedStatement.setString(2, data.getTipo());
 			preparedStatement.setString(3, data.getDesc());
 			preparedStatement.setDouble(4, data.getPrezzo());
-			preparedStatement.setInt(5, data.getVenduti());
-			preparedStatement.setString(6, data.getImmagine());
 			preparedStatement.executeUpdate();
-
 			connection.commit();
 		} finally {
 			try {
@@ -118,15 +115,15 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 		return prod;
 	}
 
-	
-	
+
+
 	@Override
 	public void doDelete(ProdottoBean data) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String selectSQL = "DELETE FROM " + ProdottoBeanDao.TABLE_NAME + " WHERE nomeprodotto= ?";
-		
+
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = (PreparedStatement) connection.prepareStatement(selectSQL);
@@ -180,5 +177,101 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 		return prod;
 	}
 
+	@Override
+	public void doUpdate (String imageURL) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		String updateSQL = "UPDATE " + ProdottoBeanDao.TABLE_NAME + " SET  immagine = ? WHERE immagine = 'empty';";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = (PreparedStatement) connection.prepareStatement(updateSQL);
+			preparedStatement.setString(1, imageURL);
+			preparedStatement.executeUpdate();
+			connection.commit();
+		} 
+		finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+		connection.close();
+	}
+
+	
+	public ProdottoBean doRetrieveById(int id) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		String selectSQL = "SELECT * FROM " + ProdottoBeanDao.TABLE_NAME + " WHERE idProdotto = ?";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = (PreparedStatement) connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, id);
+
+			ResultSet rs = (ResultSet) preparedStatement.executeQuery();
+
+			rs.next();
+			ProdottoBean prod = new ProdottoBean();
+			prod.setNome(rs.getString(1));
+			prod.setTipo(rs.getString(2));
+			prod.setDesc(rs.getString(3));
+			prod.setPrezzo(rs.getDouble(4));
+			prod.setVenduti(rs.getInt(5));
+			prod.setImmagine(rs.getString(6));
+			prod.setIdProdotto(rs.getInt(7));				
+			return prod;						
+		}
+		finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+
+	public ProdottoBean paninoVenduto() throws SQLException
+	{
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		String panVend = "SELECT * FROM "+ ProdottoBeanDao.TABLE_NAME +" WHERE tipo = 'panino' AND venduti = (SELECT MAX(venduti) FROM " +ProdottoBeanDao.TABLE_NAME+ " where tipo = 'panino');";                          
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = (PreparedStatement) connection.prepareStatement(panVend);
+
+			ResultSet rs = (ResultSet) preparedStatement.executeQuery();
+
+			rs.next();
+			ProdottoBean prod = new ProdottoBean();
+			prod.setNome(rs.getString(1));
+			prod.setTipo(rs.getString(2));
+			prod.setDesc(rs.getString(3));
+			prod.setPrezzo(rs.getDouble(4));
+			prod.setVenduti(rs.getInt(5));
+			prod.setImmagine(rs.getString(6));
+			prod.setIdProdotto(rs.getInt(7));
+
+			return prod;
+
+		}
+
+		finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
 
 }

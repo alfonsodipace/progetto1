@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="javax.*" %>
-<%@page import="bean.Riempie1Bean" %>
-<%@page import="bean.Riempie1BeanDao" %>
+<%@page import="bean.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,10 +18,6 @@
 	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>	   
 <body>
-	<%if(session.getAttribute("acquistato").equals("si")) {%>
-		<script> alert("Acquisto Effettuato");</script>
-		<%session.setAttribute("acquistato", "no"); %>
-		<%} %>
 <header class="container">
 	<img class="img-responsive" style="border-radius: 10px 10px 10px 10px; margin-top:4%;" src="images/logo.jpeg">
 </header>		
@@ -66,47 +61,30 @@
 </div>
 <% double tot=0; %>
 <div class="container" >
-	<h2>Il mio carrello:</h2>
+	<h2>I miei ordini:</h2>
 	<div class="row" >
-		<%! Riempie1BeanDao  dao = new Riempie1BeanDao(); 
-			ArrayList<Riempie1Bean> userList = new ArrayList<Riempie1Bean>(); 
-			int idcarrello;%>
+		<%! OrdinaBeanDao  dao = new OrdinaBeanDao();
+			ProdottoBeanDao daoP = new ProdottoBeanDao();
+			ProdottoBean arrPr = new ProdottoBean();
+			ArrayList<OrdinaBean> userList = new ArrayList<OrdinaBean>(); 
+					%>
 		
 		<%	userList = dao.doRetrieveByKey(user.getEmail());
-			for (Riempie1Bean s : userList) { %>   
+			for (OrdinaBean s : userList) { %>
+				<% arrPr = daoP.doRetrieveById(s.getIdProdotto()); %>   
 				<form  action="CarrelloAction" name="test" method="get">   
 					<div  class="col-md-4 text-center" >
-						<div class="service">
-							<% tot= tot + s.getPrezzo();				// passo tot e idCar al form sotto
-							   idcarrello=s.getIdCarrello(); %>												
-							<span style="color: #fff;"class="span"><% out.print(s.getNome()); %></span><br>
-	     					<input type="hidden" name="prezzo" value=<% out.print(s.getPrezzo()); %>>
-					  		<input type="hidden" name="email" value=<% out.print(user.getEmail()); %>>
-	 						<input type="hidden" name="nome" value=<% out.print(s.getNome()); %>>
-		     				<input type="hidden" name="tipo" value=<% out.print(s.getTipo()); %>>
-	 						<input type="hidden" name="idprodotto" value=<% out.print(s.getIdProdotto()); %>>
-	 						<input type="hidden" name="idcarrello" value=<% out.print(s.getIdCarrello()); %>>
-							<input type="hidden" name="action" value="rimuovi">
-			  				<span style="color: #fff;" class="span">€ &nbsp;<% out.print(s.getPrezzo()); %> &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;</span>
-				 			<input type="submit" id="submit" class="button" name="submit" onclick="alert('Prodotto rimosso dal carrello!')" value=""> 
+						<div class="service">											
+							<span style="color: #fff; float:center;"class="span"><%= arrPr.getNome() %></span><br><br>
+							<a href=""><img class="img-responsive" style="border-radius:10px; margin-left: 35%;width:100px; height: 100px;" src="<%=arrPr.getImmagine()%>"/></a><br>
+							<span style="color: #fff;  "class="span">Acquistato il :<%= s.getDataOrdine() %>
+							 <br>Prezzo: € &nbsp;<%=arrPr.getPrezzo() %></span>
+				 			
 						</div>
 					</div>
 				</form>
 		<% } %>	
 	</div>
-	
-	<br>
-	
-	<form action="CarrelloAction" method="get">
-
-		<label style="color:#fff;">Totale: </label>&nbsp; &nbsp; <label style="color:#fff; "> <% out.print(tot); %> </label>&nbsp;&nbsp;&nbsp;
-		<input type="hidden" name="email" value="<% out.print(user.getEmail()); %>">
-		<input type="submit" id="submit2" class="btn btn-default" name="submit" value="Conferma Ordine" > 
-		<input type="hidden" name="idcarrello" value="<% out.print(idcarrello); %>">	
-		<input type="hidden" name="tot" value="<% out.print(tot); %>">
-		<input type="hidden" name="action" value="buy">
-	
-	</form>
 </div>
 
 

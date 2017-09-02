@@ -11,7 +11,7 @@ public interface CarrelloBeanDaoInterface {
 	
 	public CarrelloBean doRetrieveByEmail(String nome) throws SQLException;
 	
-	public void doUpdate(int idCarrello, double tot) throws SQLException;
+	
 	
 	public Collection<CarrelloBean> doRetrieveAll(String order) throws SQLException;
 
