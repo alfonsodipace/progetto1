@@ -2,9 +2,20 @@
  * 			VALIDAZIONE CAMPI PAGINA REGISTRAZIONE
  */
 var email,nome,pass,cognome, message;
-email=nome=pass=cognome=0;
+email=nome=pass=cognome=tel=0;
 
 $(document).ready(function() { EnableDisableButton();});
+
+
+function cambia() { //utilizzata in MyAccount.jsp
+	document.getElementById("aggiorna").removeAttribute("disabled");
+	var x = document.getElementsByClassName("comment");
+	for(i=0; x; i++ ) {
+		document.getElementsByClassName("comment")[i].disabled=false;
+	}
+		
+	
+}
 
 
 function ValidareEmail(text) {
@@ -32,10 +43,26 @@ function ValidareEmail(text) {
 		}
 		else {
 			email=0;
-			document.getElementById("span").innerHTML = "formato email non corretto";
+			document.getElementById("span").innerHTML = "Formato email non corretto";
 			EnableDisableButton();
 		}
 	});
+}
+
+function ValidareTelefono(text)
+{
+	var telCor = "^[0-9]{5,10}$";
+	if(text.value.match(telCor))
+		{
+			tel=1;
+			document.getElementById("cell").innerHTML = "";
+			EnableDisableButton();
+		}
+	else { 
+		tel=0;
+		document.getElementById("cell").innerHTML = "Formato telefono non corretto";
+		EnableDisableButton();
+	}
 }
 
 function ValidareNome(text) {
@@ -62,7 +89,7 @@ function ValidareCognome(text) {
 	}
 	else { 
 		cognome=0;
-		document.getElementById("surname").innerHTML = "formato cognome non corretto";
+		document.getElementById("surname").innerHTML = "Formato cognome non corretto";
 		EnableDisableButton();
 	}
 }
@@ -78,14 +105,14 @@ function ValidarePassword(text) {
 	}
 	else{
 		pass=0;
-		document.getElementById("psw").innerHTML = "formato password non corretto";
+		document.getElementById("psw").innerHTML = "Formato password non corretto";
 		EnableDisableButton();
 	}
 }
 
 
 function EnableDisableButton() {
-	if(email+nome+pass+cognome==4)
+	if(email+nome+pass+cognome+tel==6)
 		$('#submit').prop("disabled",false);
 	else{
 		$('#submit').prop("disabled",true);

@@ -36,6 +36,24 @@ body {
 	background-position: center;
 }
 
+#submit1 { /* immagine di rimozione prodotto dal database */
+	width:42px;
+	height: 42px;
+	color:#333;
+	background-color:#333;
+	background-image: url('../images/remove.png');
+	background-repeat: no-repeat;
+	background-position: center;
+}
+#submit2 { /* immagine di rimozione prodotto dal database */
+	width:42px;
+	height: 42px;
+	color:#333;
+	background-color:#333;
+	background-image: url('../images/ok.png');
+	background-repeat: no-repeat;
+	background-position: center;
+}
 footer {
 	color: #fff;
 	font-size: 15px;

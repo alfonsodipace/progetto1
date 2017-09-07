@@ -79,15 +79,15 @@
 						<div class="service">
 							<% tot= tot + s.getPrezzo();				// passo tot e idCar al form sotto
 							   idcarrello=s.getIdCarrello(); %>												
-							<span style="color: #fff;"class="span"><% out.print(s.getNome()); %></span><br>
-	     					<input type="hidden" name="prezzo" value=<% out.print(s.getPrezzo()); %>>
-					  		<input type="hidden" name="email" value=<% out.print(user.getEmail()); %>>
-	 						<input type="hidden" name="nome" value=<% out.print(s.getNome()); %>>
-		     				<input type="hidden" name="tipo" value=<% out.print(s.getTipo()); %>>
-	 						<input type="hidden" name="idprodotto" value=<% out.print(s.getIdProdotto()); %>>
-	 						<input type="hidden" name="idcarrello" value=<% out.print(s.getIdCarrello()); %>>
+							<span style="color: #fff;"class="span"><%=s.getNome()%></span><br>
+	     					<input type="hidden" name="prezzo" value=<%=s.getPrezzo()%>>
+					  		<input type="hidden" name="email" value=<%=user.getEmail()%>>
+	 						<input type="hidden" name="nome" value=<%=s.getNome()%>>
+		     				<input type="hidden" name="tipo" value=<%=s.getTipo() %>>
+	 						<input type="hidden" name="idprodotto" value=<%= s.getIdProdotto() %>>
+	 						<input type="hidden" name="idcarrello" value=<%= s.getIdCarrello() %>>
 							<input type="hidden" name="action" value="rimuovi">
-			  				<span style="color: #fff;" class="span">€ &nbsp;<% out.print(s.getPrezzo()); %> &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;</span>
+			  				<span style="color: #fff;" class="span">€ &nbsp;<%=s.getPrezzo() %> &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;</span>
 				 			<input type="submit" id="submit" class="button" name="submit" onclick="alert('Prodotto rimosso dal carrello!')" value=""> 
 						</div>
 					</div>
@@ -100,10 +100,10 @@
 	<form action="CarrelloAction" method="get">
 
 		<label style="color:#fff;">Totale: </label>&nbsp; &nbsp; <label style="color:#fff; "> <% out.print(tot); %> </label>&nbsp;&nbsp;&nbsp;
-		<input type="hidden" name="email" value="<% out.print(user.getEmail()); %>">
+		<input type="hidden" name="email" value="<%=user.getEmail()%>">
 		<input type="submit" id="submit2" class="btn btn-default" name="submit" value="Conferma Ordine" > 
-		<input type="hidden" name="idcarrello" value="<% out.print(idcarrello); %>">	
-		<input type="hidden" name="tot" value="<% out.print(tot); %>">
+		<input type="hidden" name="idcarrello" value="<%=idcarrello %>">	
+		<input type="hidden" name="tot" value="<%=tot %>">
 		<input type="hidden" name="action" value="buy">
 	
 	</form>
@@ -112,7 +112,7 @@
 
 		
 <footer> 
-©2017 Authors Daniele Palmieri, Alfonso di Pace, Marco Amorosi		
+©2017 Authors Daniele Palmieri, Alfonso Di Pace, Marco Amorosi		
 </footer>
 	
 </body>

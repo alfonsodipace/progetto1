@@ -49,7 +49,7 @@
        							<li><a href="MyOrders.jsp">I miei ordini</a></li>
        							<li><a href="${pageContext.request.contextPath}/UserAction?action=logout">Logout</a></li>	
 						<% } else { %> 
-								<li><a href="#">Gestisci ordini</a></li>
+								<li><a href="GestisciOrdini.jsp">Gestisci ordini</a></li>
 								<li><a href="AddProdotto.jsp">Aggiungi Prodotto</a></li>
 								<li><a href="${pageContext.request.contextPath}/UserAction?action=logout">Logout</a></li>
 							<% } 
@@ -138,7 +138,7 @@
 	
 
 <footer> 				
-	©2017 Authors Daniele Palmieri, Alfonso di Pace, Marco Amorosi		
+	©2017 Authors Daniele Palmieri, Alfonso Di Pace, Marco Amorosi		
 </footer>	
 
 </body>

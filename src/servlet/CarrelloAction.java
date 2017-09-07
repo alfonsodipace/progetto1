@@ -105,48 +105,39 @@ public class CarrelloAction extends HttpServlet {
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Carrello.jsp");
 			dispatcher.forward(request, response);
 			
-			
-			 								/// EVADI ORDINE
 		} else if(action.equals("buy")) {
-			PagamentoBean pag = new PagamentoBean();
-			PagamentoBeanDao daop = new PagamentoBeanDao();
+			ProdottoBeanDao prodDao = new ProdottoBeanDao();
 			ArrayList<Riempie1Bean> inCar = new ArrayList<>();
 			Riempie1BeanDao daoIncar = new Riempie1BeanDao();
 			OrdinaBeanDao daoOrdine = new OrdinaBeanDao();
 			String email = request.getParameter("email");
 			int idCarrello = Integer.parseInt(request.getParameter("idcarrello"));	
-			
 			try {
 				inCar=daoIncar.doRetrieveByKey(email);
 				if(!inCar.isEmpty()){
-					for(Riempie1Bean s : inCar) {
-						OrdinaBean ordine = new OrdinaBean();
-						int idProdotto = s.getIdProdotto();
-						ordine.setIdProdotto(idProdotto);
-						ordine.setEmail(email);
-						daoOrdine.doSave(ordine);
-					}
-				
-					for(Riempie1Bean s : inCar) {
-						daoIncar.doDelete(s);
-					}
-					pag.setIdCarrello(idCarrello);
-					pag.setEmail(email);
-					try {
-						daop.doSave(pag);
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-					session.setAttribute("acquistato", "si");
-				} else {
-					session.setAttribute("acquistato", "no");
-					}	
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-				} finally{
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Carrello.jsp");
-					dispatcher.forward(request, response);
+				for(Riempie1Bean s : inCar){
+					OrdinaBean ordine = new OrdinaBean();
+					int idProdotto = s.getIdProdotto();
+					ordine.setIdProdotto(idProdotto);
+					ordine.setEmail(email);
+					daoOrdine.doSave(ordine);
+					prodDao.incrementaVenduti(idProdotto);
 				}
+				
+				for(Riempie1Bean s : inCar){
+					daoIncar.doDelete(s);
+				}
+				session.setAttribute("acquistato", "si");
+					} else {
+						session.setAttribute("acquistato", "no");
+					}	
+				} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} finally{
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Carrello.jsp");
+				dispatcher.forward(request, response);
+			}
 			}
 	}
 

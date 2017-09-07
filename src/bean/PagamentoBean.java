@@ -1,10 +1,12 @@
 package bean;
 
+import java.util.Date;
+
 public class PagamentoBean {
 
 	private int idPagamento;
 	private int idCarrello;
-	private String dataAcquisto;
+	private Date dataAcquisto;
 	private String email;
 	
 
@@ -26,10 +28,10 @@ public class PagamentoBean {
 	public void setIdCarrello(int idCarrello) {
 		this.idCarrello = idCarrello;
 	}
-	public String getDataAcquisto() {
+	public Date getDataAcquisto() {
 		return dataAcquisto;
 	}
-	public void setDataAcquisto(String dataAcquisto) {
+	public void setDataAcquisto(Date dataAcquisto) {
 		this.dataAcquisto = dataAcquisto;
 	}	
 }

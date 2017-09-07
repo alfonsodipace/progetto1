@@ -3,12 +3,19 @@ package servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.CarrelloBeanDao;
+import bean.OrdinaBean;
+import bean.OrdinaBeanDao;
+import bean.PagamentoBean;
+import bean.PagamentoBeanDao;
 import bean.ProdottoBean;
 import bean.ProdottoBeanDao;
 
@@ -35,31 +42,76 @@ public class AdminAction extends HttpServlet {
 	//	response.getWriter().append("Served at: ").append(request.getContextPath());
 		String action = request.getParameter("action");
 		
-		if(action.equals("aggiungiProdotto")) {
-			System.out.println("lalla");
+		if(action.equals("rimuoviProdotto")) {
+			int idProdotto = Integer.parseInt(request.getParameter("idprodotto"));
 			String tipo = request.getParameter("tipo");
-			String nome = request.getParameter("nomeProdotto");
-			String descizione = request.getParameter("descrizione");
-			double prezzo = Double.parseDouble(request.getParameter("prezzo"));
 			
 			ProdottoBeanDao bndao = new ProdottoBeanDao();
 			ProdottoBean bn = new ProdottoBean();
-			bn.setNome(nome);
-			bn.setDesc(descizione);
-			bn.setPrezzo(prezzo);
+			
+			
+			bn.setIdProdotto(idProdotto);
 			bn.setTipo(tipo);
+			
 			try {
-				bndao.doSave(bn);
+				bndao.doDelete(bn);
+				
+				if(tipo.equals("bibita")){
+			
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Bibite.jsp");
+				dispatcher.forward(request, response);
+				}
+				if(tipo.equals("panino")){
+					
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Panini.jsp");
+					dispatcher.forward(request, response);
+					}
+				if(tipo.equals("rosticceria")){
+					
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Rosticceria.jsp");
+					dispatcher.forward(request, response);
+					}
+				if(tipo.equals("dolce")){
+					
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Dolci.jsp");
+					dispatcher.forward(request, response);
+					}
 			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		 else if(action.equals("evadiOrdine")){
+			CarrelloBeanDao daoCar = new CarrelloBeanDao();
+			OrdinaBeanDao daoOrd = new OrdinaBeanDao();
+			OrdinaBean ordBea = new OrdinaBean();
+			PagamentoBean pag = new PagamentoBean();
+			PagamentoBeanDao daop = new PagamentoBeanDao();
+			int idOrdine = Integer.parseInt(request.getParameter("idordine"));
+			String email = request.getParameter("email");
+			int idCarrello=0;
 			
-			// qui sono cazzi, non sembra startare
-	        FileUploadServlet ob=new FileUploadServlet();
-	        ob.doPost(request, response);
+			try {
+				idCarrello = daoCar.doRetrieveIDByEmail(email);
+				
+				ordBea=daoOrd.doRetrieveByeId(idOrdine);
+				pag.setDataAcquisto(ordBea.getDataOrdine());
+	
+				pag.setIdCarrello(idCarrello);
+				pag.setEmail(email);
+				
+				daop.doSave(pag);
+				daoOrd.evadiOrdine(idOrdine);
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/GestisciOrdini.jsp");
+				dispatcher.forward(request, response);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+		
+			}
+				}
 		}
 		
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

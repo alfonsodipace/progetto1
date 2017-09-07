@@ -15,14 +15,14 @@ public class PagamentoBeanDao implements PagamentoBeanDaoInterface {
 	public void doSave(PagamentoBean data) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-
-		String insertSQL = "INSERT INTO " + PagamentoBeanDao.TABLE_NAME+ " (idcarrello, dataacquisto, email) VALUES (?,?, ?)";
+		
+		String insertSQL = "INSERT INTO " + PagamentoBeanDao.TABLE_NAME+ " (idcarrello, dataacquisto, email) VALUES (?, ?, ?)";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = (PreparedStatement) connection.prepareStatement(insertSQL);
 			preparedStatement.setInt(1, data.getIdCarrello());
-			preparedStatement.setDate(2, new java.sql.Date(new Date().getTime()));
+			preparedStatement.setDate(2, new java.sql.Date(data.getDataAcquisto().getTime()));
 			preparedStatement.setString(3, data.getEmail());
 			preparedStatement.executeUpdate();
 			connection.commit();
@@ -61,7 +61,7 @@ public class PagamentoBeanDao implements PagamentoBeanDaoInterface {
 			while (rs.next()) {
 				bean.setIdPagamento(rs.getInt(1));
 				bean.setIdCarrello(rs.getInt(2));
-				bean.setDataAcquisto(rs.getString(3));
+				bean.setDataAcquisto(rs.getDate(3));
 				bean.setEmail(rs.getString(4));
 			}
 

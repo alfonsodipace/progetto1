@@ -76,20 +76,39 @@
 		userList = dao.doRetrieveAllByTipo("dolce");
 		for (ProdottoBean s : userList) { %>    
 		
-			<form  action="CarrelloAction" method="get">             
+		<% if (user.getState().equals("loggato")) {
+		if(user.getTipo().equals("utente")) {%>
+			<form  action="CarrelloAction" method="get">  
+		<%} else if(user.getTipo().equals("admin")){ %>	
+			<form  action="AdminAction" method="get">
+		<%}} else { %>  
+			<form action="CarrelloAction" method="get">
+		<%} %>	       
 				<div class="col-md-4 text-center" >
 					<div class="service">
 						<span style="color: white;" id="nome"class="span"><% out.print(s.getNome()); %></span>
-						<a href=""><img class="img-responsive" style="border-radius:10px;" src="<%out.print(s.getImmagine());%>"/></a><br> 
-						<input type="hidden" name="prezzo" value=<%out.print(s.getPrezzo());%>>
-						<input type="hidden" name="tipo" value="dolce">
-						<input type="hidden" name="email" value=<% out.print(user.getEmail());%>>
-						<input type="hidden" name="nome" value="<% out.print(s.getNome()); %>">
-						<input type="hidden" name="idprodotto" value=<% out.print(s.getIdProdotto()); %>>
-						<input type="hidden" name="action" value="aggiungi">
-						<span style="color: white;" class="span"><% out.print(s.getDesc()); %></span><br>
-						<span style="color: white;" class="span">€ &nbsp;<% out.print(s.getPrezzo());%> &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;</span>
-						<input type="submit" id="submit" class="button" name="submit" onclick="alert('Prodotto aggiunto al carrello!')" > 
+   						<a href=""><img class="img-responsive" style="border-radius:10px;" src="<%out.print(s.getImmagine());%>"/></a><br> 
+   						<input type="hidden" name="prezzo" value=<%out.print(s.getPrezzo());%>>
+   						<input type="hidden" name="tipo" value="dolce">
+   						<input type="hidden" name="email" value=<% out.print(user.getEmail());%>>
+   						<input type="hidden" name="nome" value="<% out.print(s.getNome()); %>">
+   						<input type="hidden" name="idprodotto" value=<% out.print(s.getIdProdotto()); %>>
+   						<span style="color: white;" class="span"><% out.print(s.getDesc()); %></span><br>
+   						<span style="color: white;" class="span">€ &nbsp;<% out.print(s.getPrezzo());%> &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;</span>
+   						
+   						 
+   						<% if (user.getState().equals("loggato")) {
+   						if(user.getTipo().equals("admin")){ %>
+   						<input type="hidden" name="action" value="rimuoviProdotto"> 
+   						<input type="submit" id="submit1" value="" class="button" name="submit1" onclick="alert('Prodotto rimosso dalla lista prodotti!')"> 
+   						
+   						<%}else if(user.getTipo().equals("utente")) { %>
+   						<input type="hidden" name="action" value="aggiungi">
+   						<input type="submit" id="submit" class="button" name="submit" onclick="alert('Prodotto aggiunto al carrello!')">
+   						<%}
+   						} else { %>
+   						<input type="submit" id="submit" class="button" name="submit" onclick="alert('Prodotto aggiunto al carrello!')">
+   						<%} %>
 					</div>
 				</div>
 			</form>
@@ -98,7 +117,7 @@
 </div>
 	
 <footer> 				
-	©2017 Authors Daniele Palmieri, Alfonso di Pace, Marco Amorosi				
+	©2017 Authors Daniele Palmieri, Alfonso Di Pace, Marco Amorosi				
 </footer>	
 
 </body>

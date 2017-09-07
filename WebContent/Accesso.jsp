@@ -22,6 +22,7 @@
 <% if(session.getAttribute("goodReg").equals("ok")) { %>
 	<script>
 		alert("Registrazione effettuata!");
+		<% session.setAttribute("goodReg","no");%>
 	</script>
 <% } %>
 

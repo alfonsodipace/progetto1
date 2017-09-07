@@ -17,7 +17,7 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + ProdottoBeanDao.TABLE_NAME
-				+ " (nomeprodotto, Tipo, Descrizione, Prezzo) VALUES (?, ?, ?, ?)";
+				+ " (nomeprodotto, Tipo, Descrizione, Prezzo, immagine) VALUES (?, ?, ?, ?, ?)";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -26,6 +26,7 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 			preparedStatement.setString(2, data.getTipo());
 			preparedStatement.setString(3, data.getDesc());
 			preparedStatement.setDouble(4, data.getPrezzo());
+			preparedStatement.setString(5, data.getImmagine());
 			preparedStatement.executeUpdate();
 			connection.commit();
 		} finally {
@@ -122,12 +123,12 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		String selectSQL = "DELETE FROM " + ProdottoBeanDao.TABLE_NAME + " WHERE nomeprodotto= ?";
+		String selectSQL = "DELETE FROM " + ProdottoBeanDao.TABLE_NAME + " WHERE idProdotto = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = (PreparedStatement) connection.prepareStatement(selectSQL);
-			preparedStatement.setString(1, data.getNome());
+			preparedStatement.setInt(1, data.getIdProdotto());
 			preparedStatement.executeUpdate(); 
 			connection.commit();
 		} finally {
@@ -138,6 +139,44 @@ public class ProdottoBeanDao implements ProdottoBeanDaoInterface {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+	}
+	
+	public void incrementaVenduti(int id){
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ProdottoBean prod=null;
+		try {
+			prod = doRetrieveById(id);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		String updateSQL = "UPDATE " + ProdottoBeanDao.TABLE_NAME + " SET  venduti = ? WHERE idProdotto = ? ";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = (PreparedStatement) connection.prepareStatement(updateSQL);
+			preparedStatement.setInt(1, prod.getVenduti()+1);
+			preparedStatement.setInt(2, id);
+			preparedStatement.executeUpdate();
+			connection.commit();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	
 	}
 
 	@Override

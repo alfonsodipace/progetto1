@@ -126,7 +126,7 @@ public class UserAction extends HttpServlet {
 				catch (SQLException e) {
 					// TODO Auto-generated catch block	
 				}
-
+ 
 			}
 
 			// LOG-OUT //
@@ -149,7 +149,7 @@ public class UserAction extends HttpServlet {
 				String telefono = request.getParameter("telefono");
 				String emai = utente.getEmail();
 
-				bn.setNome(nome);
+				bn.setNome(nome); 
 				bn.setCognome(cognome);
 				bn.setIndirizzo(indirizzo);
 				bn.setTelefono(telefono);

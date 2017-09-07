@@ -13,7 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="CSS/myAccountCSS.css"/>
 	<link rel="icon" href="images/favicon.jpg" />
-	<script src="js/ModificaDati.js"></script>
+	<script src="js/Validation.js"></script>
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
@@ -52,20 +52,20 @@
 </div>	
 	
 <div class="container">
-	<form name="frm" action="UserAction" method="post">
+	<form name="reg" action="UserAction" method="post">
 		<label style="color:#fff;">Email: </label>&nbsp; &nbsp;<input type="text" name="emai" value="<%=user.getEmail()%>" disabled> 
 		<br>
 		<br>
-		<label style="color:#fff;">Nome:</label>&nbsp; &nbsp; <input type="text" name="firstname" class="comment" value="<%=user.getNome()%>" disabled> 
+		<label style="color:#fff;">Nome:</label>&nbsp; &nbsp; <input type="text" id="firstname" name="firstname" class="comment" value="<%=user.getNome()%>" disabled onkeyup= "ValidareNome(document.reg.firstname)"><span style="color: white;" id=name></span> 
 	    <br>
 	    <br>
-	    <label style="color:#fff;">Cognome:</label>&nbsp; &nbsp;<input type="text" name="lastname" class="comment" value="<%=user.getCognome()%>"disabled>
+	    <label style="color:#fff;">Cognome:</label>&nbsp; &nbsp;<input type="text" name="lastname" class="comment" value="<%=user.getCognome()%>"disabled onkeyup= "ValidareCognome(document.reg.lastname)"><span  style="color: white;" id=surname></span>
 	    <br>
 	    <br>
 	    <label style="color:#fff;">Indirizzo:</label> &nbsp; &nbsp;<input type="text" name="indirizzo" class="comment" value="<%=user.getIndirizzo()%>"disabled>
 	    <br>
 	    <br>
-	    <label style="color:#fff;">Telefono: </label>&nbsp; &nbsp; <input type="text" name="telefono" class="comment" value="<%=user.getTelefono()%>"disabled>
+	    <label style="color:#fff;">Telefono: </label>&nbsp; &nbsp; <input type="text" name="telefono" class="comment" value="<%=user.getTelefono()%>"disabled onkeyup="ValidareTelefono(document.reg.telefono)"><span style="color: white;" id=cell></span>
 	   	<br>
 	    <br>
 	    <div class="form-group">
@@ -81,7 +81,7 @@
 	
 		
 <footer> 
-	©2017 Authors Daniele Palmieri, Alfonso di Pace, Marco Amorosi
+	©2017 Authors Daniele Palmieri, Alfonso Di Pace, Marco Amorosi
 </footer>
 	
 </body>

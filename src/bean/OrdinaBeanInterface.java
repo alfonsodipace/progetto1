@@ -10,8 +10,9 @@ public interface OrdinaBeanInterface {
 
 	void doDelete(OrdinaBean data) throws SQLException;
 
-	Collection<OrdinaBean> doRetrieveAll(String order) throws SQLException;
 
 	ArrayList<OrdinaBean> doRetrieveByKey(String email) throws SQLException;
+
+	ArrayList<OrdinaBean> doRetrieveAll() throws SQLException;
 
 }

@@ -6,6 +6,8 @@ public class OrdinaBean {
  private String email;
  private int idProdotto;
  private Date dataOrdine;
+ private int idOrdine;
+ private String stato;
 	
 	public OrdinaBean() { }
 
@@ -31,6 +33,22 @@ public class OrdinaBean {
 
 	public void setDataOrdine(Date dataOrdine) {
 		this.dataOrdine = dataOrdine;
+	}
+
+	public int getIdOrdine() {
+		return idOrdine;
+	}
+
+	public void setIdOrdine(int idOrdine) {
+		this.idOrdine = idOrdine;
+	}
+
+	public String getStato() {
+		return stato;
+	}
+
+	public void setStato(String stato) {
+		this.stato = stato;
 	}
  
  

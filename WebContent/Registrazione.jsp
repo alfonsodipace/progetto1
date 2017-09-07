@@ -23,7 +23,7 @@
 	<img class="img-responsive" style="border-radius: 10px 10px 10px 10px;margin-top:4%;" src="images/logo.jpeg">
 </header>
 
-
+ 
 <div id="headerWrap" class="wrap">
 	<header class="container">
 		<nav  id="mainNav" class="navbar" role="navigation">
@@ -67,7 +67,7 @@
 		</div>
 		<div class="form-group">
 			<label style="color:#fff"  for="user">Telefono:</label><br>
-			<input type="text"  id="telefono" name="telefono" >
+			<input type="text"  id="telefono" name="telefono" onkeyup="ValidareTelefono(document.reg.telefono)"><span style="color: white;" id=cell></span>
 		</div>
 		<div class="form-group">
 			<label style="color:#fff"  for="user">Email:</label><br>
@@ -75,7 +75,7 @@
 		</div>
 		<div class="form-group">
 			<label style="color:#fff" for="user">Password:</label><br>
-			<input type="password" id="pass" name="pass" onkeyup= "ValidarePassword(document.reg.pass)"><span style="color: white;" id=psw></span>
+			<input type="password" id="pass" name="pass" onkeyup="ValidarePassword(document.reg.pass)"><span style="color: white;" id=psw></span>
 		</div>
 		<div class="form-group">
 			<input type="submit" id="submit" class="btn btn-default" name="submit" value="Registrati" > 
@@ -88,7 +88,7 @@
 
 		
 <footer> 
-	©2017 Authors Daniele Palmieri, Alfonso di Pace, Marco Amorosi 					
+	©2017 Authors Daniele Palmieri, Alfonso Di Pace, Marco Amorosi 					
 </footer>	
 		
 </body>
