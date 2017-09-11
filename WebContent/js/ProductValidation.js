@@ -3,44 +3,14 @@
  */
 
 
-var name,descr,price
-name=descr=price=0;
+var rice=0;
 
 $(document).ready(function() { EnableDisableButton();});
 
 
-function ValidareNome(text) {
-	var user = "^[a-zA-Z\\s]*$";
-	if(text.value.match(user)) {
-		name=1;
-		document.getElementById("name").innerHTML = "";
-		EnableDisableButton();
-	}
-	else { 
-		name=0;
-		document.getElementById("name").innerHTML = "Formato nome non corretto";
-		EnableDisableButton();
-	}
-}
-
-
-function ValidareDesc(text) {
-	var user = "^[a-zA-Z,. ]*$";
-	if(text.value.match(user)) {
-		descr=1;
-		document.getElementById("description").innerHTML = "";
-		EnableDisableButton();
-	}
-	else { 
-		descr=0;
-		document.getElementById("description").innerHTML = "Formato descrizione non corretta";
-		EnableDisableButton();
-	}
-}
-
 
 function ValidarePrice(text) {
-	var user = "^[0-9]([.][0-9])?$";
+	var user = /^\d+(?:[.,]\d+)*$/;
 	if(text.value.match(user)) {
 		price=1;
 		document.getElementById("price").innerHTML = "";
@@ -55,7 +25,7 @@ function ValidarePrice(text) {
 
 
 function EnableDisableButton() {
-	if(name+descr+price>3)
+	if(price==1)
 		$('#submit').prop("disabled",false);
 	else{
 		$('#submit').prop("disabled",true);

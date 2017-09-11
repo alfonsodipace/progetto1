@@ -4,6 +4,8 @@
 <html>
 <head>
 	<jsp:useBean id="user" class="bean.UtenteBean" scope="session"/>
+	<jsp:useBean id="carrello" class="bean.CarrelloBean" scope="session"/>
+	<jsp:useBean id="oggettiCar" class="java.util.ArrayList" scope="session"/>
 	<meta  http-equiv="Content-Type" content="text/html" charset="UTF-8" >
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>I-PHAME</title>

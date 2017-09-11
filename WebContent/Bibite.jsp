@@ -7,7 +7,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<jsp:useBean id="user" class="bean.UtenteBean" scope="session"/>  
+	<jsp:useBean id="user" class="bean.UtenteBean" scope="session"/> 
+	<jsp:useBean id="carrello" class="bean.CarrelloBean" scope="session"/>
+	<jsp:useBean id="oggettiCar" class="java.util.ArrayList" scope="session"/>  
 	<meta  http-equiv="Content-Type" content="text/html" charset="UTF-8" >
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>I-PHAME</title>
@@ -48,15 +50,15 @@
 					<li><a href="Rosticceria.jsp">Rosticceria</a></li>
 					<li><a href="Bibite.jsp">Bibite</a></li>
 					<li><a href="Dolci.jsp">Dolci</a></li>
+					<li><a href="Carrello.jsp">Carrello</a></li>
 					<%  
 						if (user.getState().equals("loggato")) { 
 							if(user.getTipo().equals("utente")) { %>
 								<li><a href="MyAccount.jsp">Il mio account</a></li>
-								<li><a href="Carrello.jsp">Carrello</a></li>
        							<li><a href="MyOrders.jsp">I miei ordini</a></li>
        							<li><a href="${pageContext.request.contextPath}/UserAction?action=logout">Logout</a></li>	
 						<% } else { %> 
-								<li><a href="#">Gestisci ordini</a></li>
+								<li><a href="GestisciOrdini.jsp">Gestisci ordini</a></li>
 								<li><a href="AddProdotto.jsp">Aggiungi Prodotto</a></li>
 								<li><a href="${pageContext.request.contextPath}/UserAction?action=logout">Logout</a></li>
 							<% } 
@@ -82,13 +84,13 @@
 			<form  action="CarrelloAction" method="get">  
 		<%} else if(user.getTipo().equals("admin")){ %>	
 			<form  action="AdminAction" method="get">
-		<%}} else { %>  
+		<%}
+		} else { %>  
 			<form action="CarrelloAction" method="get">
 		<%} %>	       
 				<div class="col-md-4 text-center" >
 					<div class="service">
 						<span style="color: white;" id="nome"class="span"><% out.print(s.getNome()); %></span>
-						<p><%out.print(s.getImmagine());%></p>
    						<a href=""><img class="img-responsive" style="border-radius:10px;" src="<%out.print(s.getImmagine());%>"/></a><br> 
    						<input type="hidden" name="prezzo" value=<%out.print(s.getPrezzo());%>>
    						<input type="hidden" name="tipo" value="bibita">
@@ -109,6 +111,7 @@
    						<input type="submit" id="submit" class="button" name="submit" onclick="alert('Prodotto aggiunto al carrello!')">
    						<%}
    						} else { %>
+   						<input type="hidden" name="action" value="aggiungi">
    						<input type="submit" id="submit" class="button" name="submit" onclick="alert('Prodotto aggiunto al carrello!')">
    						<%} %>
 					</div>

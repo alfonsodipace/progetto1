@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,6 +44,9 @@ public class CarrelloAction extends HttpServlet {
 		
 											// AGGIUNGI
 		if(action.equals("aggiungi")) {
+			UtenteBean utente = (UtenteBean) session.getAttribute("user");
+			
+			if(utente.getState().equals("loggato")){
 			Riempie1BeanDao fill= new Riempie1BeanDao();
 			Riempie1Bean bean = new Riempie1Bean();
 			CarrelloBeanDao carDao= new CarrelloBeanDao();
@@ -77,10 +81,50 @@ public class CarrelloAction extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		} else {
+			CarrelloBean carrello = (CarrelloBean) session.getAttribute("carrello");
+			Riempie1Bean bean = new Riempie1Bean();
+			@SuppressWarnings("unchecked")
+			ArrayList<Riempie1Bean> listCar =( ArrayList<Riempie1Bean> ) session.getAttribute("oggettiCar");
+			String tipo = request.getParameter("tipo");
+			String nome = request.getParameter("nome");
+			Double prezzo = Double.parseDouble(request.getParameter("prezzo"));
+			int idProd = Integer.parseInt(request.getParameter("idprodotto"));
+			
+				carrello.setEmail("");
+				carrello.setIdCarrello(generaIdCarrello());
+				bean.setEmail(carrello.getEmail());
+				bean.setNome(nome);
+				bean.setPrezzo(prezzo);
+				bean.setTipo(tipo);
+				bean.setIdCarrello(carrello.getIdCarrello());
+				bean.setIdProdotto(idProd);
+				listCar.add(bean);
+			
+				if(tipo.equals("panino")){
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Panini.jsp");
+				dispatcher.forward(request, response);
+				}else if(tipo.equals("bibita")){
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Bibite.jsp");
+					dispatcher.forward(request, response);
+				}else if(tipo.equals("dolce")){
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Dolci.jsp");
+					dispatcher.forward(request, response);
+				}else if(tipo.equals("rosticceria")){
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Rosticceria.jsp");
+					dispatcher.forward(request, response);
+				}
+			
+			
+		}
+			
 			
 			
 													// RIMUOVI	
 		} else if (action.equals("rimuovi")){
+			UtenteBean utente = (UtenteBean) session.getAttribute("user");
+			
+			if(utente.getState().equals("loggato")){
 			
 			String tipo = request.getParameter("tipo");
 			String nome = request.getParameter("nome");
@@ -105,13 +149,29 @@ public class CarrelloAction extends HttpServlet {
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Carrello.jsp");
 			dispatcher.forward(request, response);
 			
+			} else {
+				int idProd = Integer.parseInt(request.getParameter("idprodotto"));
+				@SuppressWarnings("unchecked")
+				ArrayList<Riempie1Bean> listCar =( ArrayList<Riempie1Bean> ) session.getAttribute("oggettiCar");
+				for(int i=0;i< listCar.size();i++){
+				if(listCar.get(i).getIdProdotto()==idProd){
+					listCar.remove(i);
+					break;
+				}
+				}
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Carrello.jsp");
+				dispatcher.forward(request, response);
+			}
+			
 		} else if(action.equals("buy")) {
+			UtenteBean utente = (UtenteBean) session.getAttribute("user");
+			
+			if(utente.getState().equals("loggato")){
 			ProdottoBeanDao prodDao = new ProdottoBeanDao();
 			ArrayList<Riempie1Bean> inCar = new ArrayList<>();
 			Riempie1BeanDao daoIncar = new Riempie1BeanDao();
 			OrdinaBeanDao daoOrdine = new OrdinaBeanDao();
-			String email = request.getParameter("email");
-			int idCarrello = Integer.parseInt(request.getParameter("idcarrello"));	
+			String email = request.getParameter("email");	
 			try {
 				inCar=daoIncar.doRetrieveByKey(email);
 				if(!inCar.isEmpty()){
@@ -128,9 +188,7 @@ public class CarrelloAction extends HttpServlet {
 					daoIncar.doDelete(s);
 				}
 				session.setAttribute("acquistato", "si");
-					} else {
-						session.setAttribute("acquistato", "no");
-					}	
+					} 	
 				} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -138,7 +196,12 @@ public class CarrelloAction extends HttpServlet {
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Carrello.jsp");
 				dispatcher.forward(request, response);
 			}
-			}
+			}   else {
+		  	session.setAttribute("acquistato", "no");
+		  	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Registrazione.jsp");
+			dispatcher.forward(request, response);
+	  }
+		} 
 	}
 
 	/**
@@ -147,6 +210,22 @@ public class CarrelloAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+	
+	protected int generaIdCarrello(){
+		int id =0,i = 0;
+		CarrelloBeanDao daoCar= new CarrelloBeanDao();
+		while(i==0) {
+			Random r= new Random();
+			id = r.nextInt(899999)+100000;
+			try {
+				if(daoCar.doRetrieveById(id))
+					i = 1;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return id;
 	}
 
 }

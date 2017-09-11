@@ -46,14 +46,11 @@
 								<li><a href="Carrello.jsp">Carrello</a></li>
        							<li><a href="MyOrders.jsp">I miei ordini</a></li>
        							<li><a href="${pageContext.request.contextPath}/UserAction?action=logout">Logout</a></li>	
-						<% } else { %> 
-								<li><a href="#">Gestisci ordini</a></li>
-								<li><a href="AddProdotto.jsp">Aggiungi Prodotto</a></li>
-								<li><a href="${pageContext.request.contextPath}/UserAction?action=logout">Logout</a></li>
-							<% } 
+						<% 
 						} else { %>
 							 <li><a href="Registrazione.jsp">Login</a></li>
-				  	<% } %>
+				  	<% } 
+				  	}%>
 				</ul>
 			</div>
 		</nav>

@@ -64,22 +64,21 @@
 		</div>
 		<div class="form-group">
 			<label style="color:#fff" for="user">Nome:</label><br>
-			<input type="text" id="nomeProdotto" name="nomeProdotto" onkeyup="ValidareNome(document.reg.nomeProdotto)"><span style="color: white;" id="name"></span>
+			<input type="text" id="nomeProdotto" name="nomeProdotto"><span style="color: white;" id="name"></span>
 		</div>
 		<div class="form-group">
 			<label style="color:#fff" for="user">Descrizione:</label><br>
-			<input type="text" id="descrizione" name="descrizione" onkeyup="ValidareDesc(document.reg.descrizione)"><span  style="color: white;" id="description"></span>
+			<textarea id="descrizione" name="descrizione"></textarea><span  style="color: white;" id="description"></span>
 		</div>
 		<div class="form-group">
 			<label style="color:#fff" for="user">Prezzo:</label><br>
-			<input type="text" id="pezzo" name="prezzo" onkeyup="ValidarePrice(document.reg.prezzo)"><span  style="color: white;" id="price"></span>
+			<input type="text" id="prezzo" name="prezzo" onkeyup="ValidarePrice(document.reg.prezzo)"><span  style="color: white;" id="price"></span>
 		</div>
 		<div class="form-group">
-		<input type="file" class="btn btn-default" name="attach"> 
- 		 <input type="reset" class="btn btn-default" value="reset" >
+		<input type="file" class="btn btn-default" name="attach">
  		 </div>	
 		<div class="form-group">
-			<input type="submit" id="submit" class="btn btn-default" name="submit" value="INVIA" > 
+			<input type="submit" id="submit" class="btn btn-default" name="submit" value="Aggiungi" > 
 			<input type="hidden" name="action" value="aggiungiProdotto">
 		</div>
 	</form>

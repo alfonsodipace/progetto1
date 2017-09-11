@@ -5,7 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<jsp:useBean id="user" class="bean.UtenteBean" scope="session"/>  
+	<jsp:useBean id="user" class="bean.UtenteBean" scope="session"/>
+	<jsp:useBean id="oggettiCar" class="java.util.ArrayList" scope="session"/> 
+	<jsp:useBean id="carrello" class="bean.CarrelloBean" scope="session"/>  
 	<meta  http-equiv="Content-Type" content="text/html" charset="UTF-8" >
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>I-PHAME</title>
@@ -41,11 +43,11 @@
 					<li><a href="Rosticceria.jsp">Rosticceria</a></li>
 					<li><a href="Bibite.jsp">Bibite</a></li>
 					<li><a href="Dolci.jsp">Dolci</a></li>
+					<li><a href="Carrello.jsp">Carrello</a></li>
 					<%  
 						if (user.getState().equals("loggato")) { 
 							if(user.getTipo().equals("utente")) { %>
 								<li><a href="MyAccount.jsp">Il mio account</a></li>
-								<li><a href="Carrello.jsp">Carrello</a></li>
        							<li><a href="MyOrders.jsp">I miei ordini</a></li>
        							<li><a href="${pageContext.request.contextPath}/UserAction?action=logout">Logout</a></li>	
 						<% } else { %> 
@@ -109,7 +111,7 @@
 				<div class="service">
 					<i class="fa fa-shopping-cart fa-4x" aria-hidden="true"></i>
 					<h3> Come acquistare:</h3>
-					<span>	Il servizio di vendita Online di I-PHAME offre copertura soltanto nella provincia di salerno,
+					<span>	Il servizio di vendita Online di I-PHAME offre copertura soltanto nella provincia di Salerno,
 				dopo aver effettuato un ordine, il pagamento va effettuato o alla consegna, o al ritiro diretto
 				della merce presso il punto vendita.</span>
 				</div>

@@ -51,7 +51,7 @@ function ValidareEmail(text) {
 
 function ValidareTelefono(text)
 {
-	var telCor = "^[0-9]{5,10}$";
+	var telCor = /^[0-9]{5,10}$/;
 	if(text.value.match(telCor))
 		{
 			tel=1;
@@ -66,7 +66,7 @@ function ValidareTelefono(text)
 }
 
 function ValidareNome(text) {
-	var user = "^[a-zA-Z\\s]*$";
+	var user = /^[a-zA-Z\\s]*$/;
 	if(text.value.match(user)) {
 		nome=1;
 		document.getElementById("name").innerHTML = "";
@@ -81,7 +81,7 @@ function ValidareNome(text) {
 
 
 function ValidareCognome(text) {
-	var user = "^[a-zA-Z\\s]*$";
+	var user = /^[a-zA-Z\\s]*$/;
 	if(text.value.match(user)) {
 		cognome=1;
 		document.getElementById("surname").innerHTML = "";
@@ -112,7 +112,7 @@ function ValidarePassword(text) {
 
 
 function EnableDisableButton() {
-	if(email+nome+pass+cognome+tel==6)
+	if(email+nome+pass+cognome+tel==5)
 		$('#submit').prop("disabled",false);
 	else{
 		$('#submit').prop("disabled",true);

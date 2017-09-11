@@ -14,6 +14,8 @@ import java.util.*;
 
 import bean.CarrelloBean;
 import bean.CarrelloBeanDao;
+import bean.Riempie1Bean;
+import bean.Riempie1BeanDao;
 import bean.UtenteBean;
 import bean.UtenteBeanDao;
 
@@ -30,7 +32,7 @@ public class UserAction extends HttpServlet {
 	public UserAction() {
 		super();
 	}
-	// 											SEI SERIO?? NON POTEVI SETTARLO A.I. NEL DB?
+	// 											
 	protected int generaIdCarrello(){
 		int id =0,i = 0;
 		CarrelloBeanDao daoCar= new CarrelloBeanDao();
@@ -50,6 +52,7 @@ public class UserAction extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
@@ -61,21 +64,22 @@ public class UserAction extends HttpServlet {
 		if(action.equals("registrazione")) {
 
 			CarrelloBeanDao daoCar = new CarrelloBeanDao();
-			CarrelloBean car = new CarrelloBean();
 			UtenteBeanDao dao = new UtenteBeanDao();
 			UtenteBean bn = new UtenteBean();
 
+			
+			CarrelloBean car = (CarrelloBean) session.getAttribute("carrello");
 			String email = request.getParameter("email");
 			String pass = request.getParameter("pass");
 			String cognome = request.getParameter("lastname");
 			String nome = request.getParameter("firstname");
 			String indirizzo = request.getParameter("indirizzo");
 			String telefono = request.getParameter("telefono");
-
-			int idCar=generaIdCarrello();
+			Object oggettiCar=  session.getAttribute("oggettiCar");
+			int idCarrello = generaIdCarrello();
 
 			try {
-
+				
 				bn.setCognome(cognome);
 				bn.setEmail(email);
 				bn.setIndirizzo(indirizzo);
@@ -84,10 +88,19 @@ public class UserAction extends HttpServlet {
 				bn.setTipo("utente");
 				bn.setTelefono(telefono);
 				dao.doSave(bn);	
-				car.setIdCarrello(idCar);
+				car.setIdCarrello(idCarrello);
 				car.setEmail(email);
 				daoCar.doSave(car);
-
+				
+				if(!((ArrayList<Riempie1Bean>)oggettiCar).isEmpty()){
+					Riempie1BeanDao fill= new Riempie1BeanDao();
+					for(Riempie1Bean s : ((ArrayList<Riempie1Bean>)oggettiCar)){
+						s.setEmail(email);
+						s.setIdCarrello(idCarrello);
+						fill.doSave(s);
+					}
+				}
+				
 				session.setAttribute("goodReg", "ok");
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Accesso.jsp");
 				dispatcher.forward(request, response);
@@ -141,7 +154,7 @@ public class UserAction extends HttpServlet {
 			else if(action.equals("aggiornamento")) {
 				UtenteBeanDao dao = new UtenteBeanDao();
 				UtenteBean bn = new UtenteBean();
-				UtenteBean utente = (UtenteBean) session.getAttribute("user"); //aggioran la sessione
+				UtenteBean utente = (UtenteBean) session.getAttribute("user"); 
 
 				String cognome = request.getParameter("lastname");
 				String nome = request.getParameter("firstname");

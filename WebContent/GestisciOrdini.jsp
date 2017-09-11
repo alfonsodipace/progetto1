@@ -39,7 +39,7 @@
 					<li><a href="Rosticceria.jsp">Rosticceria</a></li>
 					<li><a href="Bibite.jsp">Bibite</a></li>
 					<li><a href="Dolci.jsp">Dolci</a></li>
-					<li><a href="#">Gestisci ordini</a></li>
+					<li><a href="GestisciOrdini.jsp">Gestisci ordini</a></li>
 					<li><a href="AddProdotto.jsp">Aggiungi Prodotto</a></li>
 					<li><a href="${pageContext.request.contextPath}/UserAction?action=logout">Logout</a></li>
 				</ul>
@@ -55,11 +55,13 @@
 			ProdottoBeanDao daoP = new ProdottoBeanDao();
 			ProdottoBean arrPr = new ProdottoBean();
 			ArrayList<OrdinaBean> userList = new ArrayList<OrdinaBean>(); 
-					%>
+			UtenteBean utente = new UtenteBean();
+			UtenteBeanDao daoUtente=new UtenteBeanDao();%>
 		
 		<%	userList = dao.doRetrieveNonEvasi();
 			for (OrdinaBean s : userList) { %>
-				<% arrPr = daoP.doRetrieveById(s.getIdProdotto()); %>   
+				<% arrPr = daoP.doRetrieveById(s.getIdProdotto());
+				utente = daoUtente.doRetrieveByKey(s.getEmail());%>   
 				<form  action="AdminAction" name="test" method="get">   
 					<div  class="col-md-4 text-center" >
 						<div class="service">	
@@ -69,7 +71,11 @@
 							<span style="color: #fff; float:center;"class="span"><%= arrPr.getNome() %></span><br><br>
 							<a href=""><img class="img-responsive" style="border-radius:10px; margin-left: 35%;width:100px; height: 100px;" src="<%=arrPr.getImmagine()%>"/></a><br>
 							<span style="color: #fff;  "class="span">Acquistato il :<%= s.getDataOrdine() %>
-							<br>Prezzo: € &nbsp;<%=arrPr.getPrezzo() %></span>
+							<br>Prezzo: € &nbsp;<%=arrPr.getPrezzo() %>
+							<br> <%=utente.getNome() %>
+							<br><%=utente.getCognome() %>
+							<br><%=utente.getIndirizzo() %>
+							<br><%=utente.getTelefono() %></span><br>
 				 			<input type="hidden" name="action" value="evadiOrdine">
    						<input type="submit" id="submit2" class="button" value=""  name="submit" onclick="alert('Ordine evaso!')">
 						</div>

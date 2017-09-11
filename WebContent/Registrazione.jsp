@@ -4,6 +4,8 @@
 <html>
 <head>
 	<jsp:useBean id="user" class="bean.UtenteBean" scope="session"/>
+	<jsp:useBean id="carrello" class="bean.CarrelloBean" scope="session"/>
+	<jsp:useBean id="oggettiCar" class="java.util.ArrayList" scope="session"/>  
 	<meta  http-equiv="Content-Type" content="text/html" charset="UTF-8" >
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>I-PHAME</title>
@@ -43,6 +45,7 @@
 					<li><a href="Rosticceria.jsp">Rosticceria</a></li>
 					<li><a href="Bibite.jsp">Bibite</a></li>
 					<li><a href="Dolci.jsp">Dolci</a></li>
+					<li><a href="Carrello.jsp">Carrello</a></li>
 					<li><a href="Registrazione.jsp">Registrati</a></li>
 				</ul>
 			</div>
@@ -75,7 +78,7 @@
 		</div>
 		<div class="form-group">
 			<label style="color:#fff" for="user">Password:</label><br>
-			<input type="password" id="pass" name="pass" onkeyup="ValidarePassword(document.reg.pass)"><span style="color: white;" id=psw></span>
+			<input type="password" id="pass" name="pass" onkeyup= "ValidarePassword(document.reg.pass)"><span style="color: white;" id=psw></span>
 		</div>
 		<div class="form-group">
 			<input type="submit" id="submit" class="btn btn-default" name="submit" value="Registrati" > 

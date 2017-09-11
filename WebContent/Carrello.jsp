@@ -7,7 +7,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<jsp:useBean id="user" class="bean.UtenteBean" scope="session"/>  
+	<jsp:useBean id="user" class="bean.UtenteBean" scope="session"/>
+	<jsp:useBean id="carrello" class="bean.CarrelloBean" scope="session"/>
+	<jsp:useBean id="oggettiCar" class="java.util.ArrayList" scope="session"/>  
 	<meta  http-equiv="Content-Type" content="text/html" charset="UTF-8" >
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>I-PHAME</title>
@@ -44,21 +46,16 @@
 					<li><a href="Rosticceria.jsp">Rosticceria</a></li>
 					<li><a href="Bibite.jsp">Bibite</a></li>
 					<li><a href="Dolci.jsp">Dolci</a></li>
+					<li><a href="Carrello.jsp">Carrello</a></li>
 					<%  
-						if (user.getState().equals("loggato")) { 
-							if(user.getTipo().equals("utente")) { %>
+						if (user.getState().equals("loggato")) { %>
+							
 								<li><a href="MyAccount.jsp">Il mio account</a></li>
-								<li><a href="Carrello.jsp">Carrello</a></li>
        							<li><a href="MyOrders.jsp">I miei ordini</a></li>
        							<li><a href="${pageContext.request.contextPath}/UserAction?action=logout">Logout</a></li>	
-						<% } else { %> 
-								<li><a href="#">Gestisci ordini</a></li>
-								<li><a href="AddProdotto.jsp">Aggiungi Prodotto</a></li>
-								<li><a href="${pageContext.request.contextPath}/UserAction?action=logout">Logout</a></li>
-							<% } 
-						} else { %>
+						<%} else { %>
 							 <li><a href="Registrazione.jsp">Login</a></li>
-				  	<% } %>
+						<% 	} %>
 				</ul>
 			</div>
 		</nav>
@@ -68,7 +65,8 @@
 <div class="container" >
 	<h2>Il mio carrello:</h2>
 	<div class="row" >
-		<%! Riempie1BeanDao  dao = new Riempie1BeanDao(); 
+	<%  if (user.getState().equals("loggato")) { %>
+			<%! Riempie1BeanDao  dao = new Riempie1BeanDao(); 
 			ArrayList<Riempie1Bean> userList = new ArrayList<Riempie1Bean>(); 
 			int idcarrello;%>
 		
@@ -92,7 +90,28 @@
 						</div>
 					</div>
 				</form>
+		<% } %>		
+						<% } else { %>
+							<%	for (Object s : oggettiCar) { %>   
+				<form  action="CarrelloAction" name="test" method="get">   
+					<div  class="col-md-4 text-center" >
+						<div class="service">
+							<% tot= tot + ((Riempie1Bean)s).getPrezzo();				// passo tot e idCar al form sotto
+							   idcarrello=((Riempie1Bean)s).getIdCarrello(); %>												
+							<span style="color: #fff;"class="span"><%=((Riempie1Bean)s).getNome()%></span><br>
+	     					<input type="hidden" name="prezzo" value=<%=((Riempie1Bean)s).getPrezzo()%>>
+	 						<input type="hidden" name="nome" value=<%=((Riempie1Bean)s).getNome()%>>
+		     				<input type="hidden" name="tipo" value=<%=((Riempie1Bean)s).getTipo() %>>
+	 						<input type="hidden" name="idprodotto" value=<%= ((Riempie1Bean)s).getIdProdotto() %>>
+	 						<input type="hidden" name="idcarrello" value=<%= ((Riempie1Bean)s).getIdCarrello() %>>
+							<input type="hidden" name="action" value="rimuovi">
+			  				<span style="color: #fff;" class="span">€ &nbsp;<%=((Riempie1Bean)s).getPrezzo() %> &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;</span>
+				 			<input type="submit" id="submit" class="button" name="submit" onclick="alert('Prodotto rimosso dal carrello!')" value=""> 
+						</div>
+					</div>
+				</form>
 		<% } %>	
+				  	<% } %>
 	</div>
 	
 	<br>
