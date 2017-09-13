@@ -3,7 +3,7 @@
  */
 
 
-var rice=0;
+var price=0;
 
 $(document).ready(function() { EnableDisableButton();});
 

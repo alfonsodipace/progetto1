@@ -3,12 +3,20 @@ package bean;
 import java.util.Date;
 
 public class OrdinaBean {
- private String email;
- private int idProdotto;
- private Date dataOrdine;
- private int idOrdine;
- private String stato;
+	private String email;
+	private int idProdotto;
+	private Date dataOrdine;
+	private int idOrdine;
+	private String stato;
+	private String oraConsegna;
+
 	
+	public String getOraConsegna() {
+		return oraConsegna;
+	}
+	public void setOraConsegna(String oraConsegna) {
+		this.oraConsegna = oraConsegna;
+	}
 	public OrdinaBean() { }
 
 	public int getIdProdotto() {
@@ -50,8 +58,8 @@ public class OrdinaBean {
 	public void setStato(String stato) {
 		this.stato = stato;
 	}
- 
- 
- 
- 
+
+
+
+
 }

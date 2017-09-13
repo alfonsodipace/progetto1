@@ -105,7 +105,7 @@
    						if(user.getTipo().equals("admin")){ %>
    						<input type="hidden" name="action" value="rimuoviProdotto"> 
    						<input type="submit" id="submit1" value="" class="button" name="submit1" onclick="alert('Prodotto rimosso dalla lista prodotti!')"> 
-   						
+   						<a href="SetProdotto.jsp?idProd=<%out.print(s.getIdProdotto());%>">mod</a>
    						<%}else { %>
    						<input type="hidden" name="action" value="aggiungi">
    						<input type="submit" id="submit" class="button" name="submit" onclick="alert('Prodotto aggiunto al carrello!')">

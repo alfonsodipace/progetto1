@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="bean.ProdottoBeanDao" %>
+<%@page import="bean.ProdottoBean" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +16,6 @@
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/ProductValidation.js"></script>
 	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-	
 </head>
 
 <body>
@@ -52,35 +53,36 @@
 
 <div class="container">
 
-	<h2>Aggiungi un prodotto:</h2>
+	<h2>Modifica prodotto: </h2>
+
 	<form name="reg" id="form" action="Fileupload" enctype= multipart/form-data method="post">
+		<%  ProdottoBeanDao dao = new ProdottoBeanDao();
+			ProdottoBean bn = dao.doRetrieveById(Integer.parseInt(request.getParameter("idProd")));  %>
+		<input type="hidden" name="idProdotto" value=<% out.print(request.getParameter("idProd"));%>>
  		<input type="hidden" name="email" value=<% out.print(user.getEmail());%>>
 		<div class="form-group">
 		<select name="tipo">
-			<option value="panino">Panino</option>
-			<option value="rosticceria">Rosticceria</option>
-			<option value="bibita">Bibita</option>
-			<option value="dolce">Dolce</option>
+			<option value="<%out.print(bn.getTipo());%>"><%out.print(bn.getTipo());%></option>
 		</select>
 		</div>
 		<div class="form-group">
 			<label style="color:#fff" for="user">Nome:</label><br>
-			<input type="text" id="nomeProdotto" name="nomeProdotto"><span style="color: white;" id="name"></span>
+			<input type="text" id="nomeProdotto" name="nomeProdotto" value="<%out.print(bn.getNome());%>"><span style="color: white;" id="name"></span>
 		</div>
 		<div class="form-group">
 			<label style="color:#fff" for="user">Descrizione:</label><br>
-			<textarea id="descrizione" name="descrizione"></textarea><span  style="color: white;" id="description"></span>
+			<textarea id="descrizione" name="descrizione"><%out.print(bn.getDesc());%></textarea><span  style="color: white;" id="description"></span>
 		</div>
 		<div class="form-group">
 			<label style="color:#fff" for="user">Prezzo:</label><br>
-			<input type="text" id="prezzo" name="prezzo" onkeyup="ValidarePrice(document.reg.prezzo)"><span  style="color: white;" id="price"></span>
+			<input type="text" id="prezzo" name="prezzo" value="<%out.print(bn.getPrezzo());%>" onkeyup="ValidarePrice(document.reg.prezzo)"><span  style="color: white;" id="price"></span>
 		</div>
 		<div class="form-group">
-		<input type="file" class="btn btn-default" name="attach">
+			<input type="file" class="btn btn-default" name="attach">
  		 </div>	
 		<div class="form-group">
-			<input type="submit" id="submit" class="btn btn-default" name="submit" value="Aggiungi" > 
-			<input type="hidden" name="action" value="aggiungiProdotto">
+			<input type="submit" id="submit" class="btn btn-default" name="submit" value="Modifica" > 
+			<input type="hidden" name="action" value="ModificaProdotto">
 		</div>
 	</form>
 </div>

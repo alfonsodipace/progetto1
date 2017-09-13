@@ -73,9 +73,10 @@
 							<span style="color: #fff;  "class="span">Acquistato il :<%= s.getDataOrdine() %>
 							<br>Prezzo: € &nbsp;<%=arrPr.getPrezzo() %>
 							<br> <%=utente.getNome() %>
-							<br><%=utente.getCognome() %>
+							<%=utente.getCognome() %>
 							<br><%=utente.getIndirizzo() %>
-							<br><%=utente.getTelefono() %></span><br>
+							<br><%=utente.getTelefono() %>
+							<br><%=s.getOraConsegna() %></span><br>
 				 			<input type="hidden" name="action" value="evadiOrdine">
    						<input type="submit" id="submit2" class="button" value=""  name="submit" onclick="alert('Ordine evaso!')">
 						</div>

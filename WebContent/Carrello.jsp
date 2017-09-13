@@ -19,6 +19,7 @@
 	<link rel="icon" href="images/favicon.jpg" />
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	<script src="js/ValidationTime.js"></script>
 </head>	   
 <body>
 	<%if(session.getAttribute("acquistato").equals("si")) {%>
@@ -91,8 +92,8 @@
 					</div>
 				</form>
 		<% } %>		
-						<% } else { %>
-							<%	for (Object s : oggettiCar) { %>   
+	<% } else { %>
+			<%	for (Object s : oggettiCar) { %>   
 				<form  action="CarrelloAction" name="test" method="get">   
 					<div  class="col-md-4 text-center" >
 						<div class="service">
@@ -111,16 +112,18 @@
 					</div>
 				</form>
 		<% } %>	
-				  	<% } %>
+	<% } %>
 	</div>
 	
 	<br>
 	
-	<form action="CarrelloAction" method="get">
+	<form action="CarrelloAction" name="reg" method="get">
 
-		<label style="color:#fff;">Totale: </label>&nbsp; &nbsp; <label style="color:#fff; "> <% out.print(tot); %> </label>&nbsp;&nbsp;&nbsp;
-		<input type="hidden" name="email" value="<%=user.getEmail()%>">
-		<input type="submit" id="submit2" class="btn btn-default" name="submit" value="Conferma Ordine" > 
+		<label style="color:#fff;">Totale: </label>&nbsp; &nbsp; <label style="color:#fff; "> <% out.print(tot); %> </label>&nbsp;&nbsp;&nbsp;<br>
+		<label style="color:#fff"  for="user">Orario Consegna:</label>
+		<input style="width:70px;border-radius: 10px 10px 10px 10px;" type="text"  id="orario" name="orario" onkeyup="ValidareOra(document.reg.orario)" placeholder="HH:MM"><span style="color: white;" id=hh></span>
+		<input type="hidden" name="email" value="<%=user.getEmail()%>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<br>	<input type="submit" id="submit2" class="btn btn-default" name="submit" value="Conferma Ordine" > 
 		<input type="hidden" name="idcarrello" value="<%=idcarrello %>">	
 		<input type="hidden" name="tot" value="<%=tot %>">
 		<input type="hidden" name="action" value="buy">

@@ -18,7 +18,7 @@ private static final String TABLE_NAME = "ordina1";
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + OrdinaBeanDao.TABLE_NAME
-				+ " (email, idProdotto, dataacquisto) VALUES (?, ?, ?)";
+				+ " (email, idProdotto, dataacquisto, oraconsegna) VALUES (?, ?, ?, ?)";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -26,6 +26,7 @@ private static final String TABLE_NAME = "ordina1";
 			preparedStatement.setString(1, data.getEmail());
 			preparedStatement.setDouble(2, data.getIdProdotto());
 			preparedStatement.setDate(3, new java.sql.Date(new java.util.Date().getTime()));
+			preparedStatement.setString(4, data.getOraConsegna());
 			preparedStatement.executeUpdate();
 			connection.commit();
 		} finally {
@@ -69,7 +70,7 @@ private static final String TABLE_NAME = "ordina1";
 		
 		ArrayList<OrdinaBean> array = new ArrayList<>();
 
-		String selectSQL = "SELECT s.email, s.idProdotto, s.dataacquisto FROM ordina1 s join "
+		String selectSQL = "SELECT s.email, s.idProdotto, s.dataacquisto, s.oraconsegna FROM ordina1 s join "
 				+ "prodotto t WHERE s.idProdotto=t.idProdotto and s.email= ?";
 
 		try {
@@ -83,6 +84,7 @@ private static final String TABLE_NAME = "ordina1";
 				bean.setEmail(rs.getString(1));
 				bean.setIdProdotto(rs.getInt(2));
 				bean.setDataOrdine(rs.getDate(3));
+				bean.setOraConsegna(rs.getString(4));
 				array.add(bean);
 			}
 		}
@@ -118,7 +120,8 @@ private static final String TABLE_NAME = "ordina1";
 				bean.setIdProdotto(rs.getInt(2));
 				bean.setIdOrdine(rs.getInt(3));
 				bean.setDataOrdine(rs.getDate(4));
-				bean.setStato(rs.getString(5));
+				bean.setOraConsegna(rs.getString(5));
+				bean.setStato(rs.getString(6));
 				
 			}
 		} catch (SQLException e) {
@@ -192,7 +195,8 @@ private static final String TABLE_NAME = "ordina1";
 				bean.setIdProdotto(rs.getInt(2));
 				bean.setIdOrdine(rs.getInt(3));
 				bean.setDataOrdine(rs.getDate(4));
-				bean.setStato(rs.getString(5));
+				bean.setOraConsegna(rs.getString(5));
+				bean.setStato(rs.getString(6));
 				array.add(bean);
 			}
 		}
@@ -227,7 +231,8 @@ private static final String TABLE_NAME = "ordina1";
 				bean.setIdProdotto(rs.getInt(2));
 				bean.setIdOrdine(rs.getInt(3));
 				bean.setDataOrdine(rs.getDate(4));
-				bean.setStato(rs.getString(5));
+				bean.setOraConsegna(rs.getString(5));
+				bean.setStato(rs.getString(6));
 				array.add(bean);
 			}
 		}

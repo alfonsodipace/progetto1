@@ -28,18 +28,18 @@ import bean.ProdottoBeanDao;
 public class FileUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static String SAVE_DIR="";
-  
-	
+
+
 	public void init() {
 		SAVE_DIR = getServletConfig().getInitParameter("file-upload");
 	}
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public FileUploadServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public FileUploadServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -59,55 +59,112 @@ public class FileUploadServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//PrintWriter out =  response.getWriter();
-		
-		response.setContentType("text/plain");
-		String savePath= request.getServletContext().getRealPath("") + "NewImages";
-		
-		String URLPath= "images" + File.separator + "NewImages";
-		
-		//salvo la patch nel db
-		
-		
-		String fileName="";
-		File fileSavedDir = new File(savePath);
-		String tipo = request.getParameter("tipo");
-		String nome = request.getParameter("nomeProdotto");
-		String descizione = request.getParameter("descrizione");
-		double prezzo = Double.parseDouble(request.getParameter("prezzo"));
-		
-		ProdottoBeanDao bndao = new ProdottoBeanDao();
-		ProdottoBean bn = new ProdottoBean();
-		if(!fileSavedDir.exists()){
-			fileSavedDir.mkdir();
-		}
-		
-	//	out.write("upload =\n");
-		for(Part part: request.getParts()) {
-			 fileName = extractFileName(part);
-			if(fileName != null && !fileName.equals("")) {
-				part.write(savePath + File.separator + fileName);
-				bn.setNome(nome);
-				bn.setDesc(descizione);
-				bn.setPrezzo(prezzo);
-				bn.setTipo(tipo);
-				bn.setImmagine(URLPath + File.separator + fileName);
-				//bn.setImmagine(savePath + File.separator + fileName);
-				try {
-					bndao.doSave(bn);
-					
+
+		String action = request.getParameter("action");
+
+		if(action.equals("aggiungiProdotto")) {
+			response.setContentType("text/plain");
+			String savePath= request.getServletContext().getRealPath("") + "NewImages";
+
+			String URLPath= "images" + File.separator + "NewImages";
+
+			//salvo la patch nel db
+
+			String fileName="";
+			File fileSavedDir = new File(savePath);
+			String tipo = request.getParameter("tipo");
+			String nome = request.getParameter("nomeProdotto");
+			String descizione = request.getParameter("descrizione");
+			double prezzo = Double.parseDouble(request.getParameter("prezzo"));
+
+			ProdottoBeanDao bndao = new ProdottoBeanDao();
+			ProdottoBean bn = new ProdottoBean();
+			if(!fileSavedDir.exists()){
+				fileSavedDir.mkdir();
+			}
+
+			//	out.write("upload =\n");
+			for(Part part: request.getParts()) {
+				fileName = extractFileName(part);
+				if(fileName != null && !fileName.equals("")) {
+					part.write(savePath + File.separator + fileName);
+					bn.setNome(nome);
+					bn.setDesc(descizione);
+					bn.setPrezzo(prezzo);
+					bn.setTipo(tipo);
+					bn.setImmagine(URLPath + File.separator + fileName);
+					//bn.setImmagine(savePath + File.separator + fileName);
+					try {
+						bndao.doSave(bn);
+
 						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/AddProdotto.jsp");
 						dispatcher.forward(request, response);
-						
-						
-				} catch (SQLException e) {
-					e.printStackTrace();
+
+
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					//out.write(savePath + File.separator + fileName +"\n");
 				}
-				//out.write(savePath + File.separator + fileName +"\n");
 			}
+			//out.close();
 		}
-		//out.close();
-		
-		
+
+
+
+		else if(action.equals("ModificaProdotto")) {
+
+			response.setContentType("text/plain");
+			String savePath= request.getServletContext().getRealPath("") + "NewImages";
+
+			String URLPath= "images" + File.separator + "NewImages";
+
+			//salvo la patch nel db
+
+			ProdottoBean old = new ProdottoBean();
+			old.setIdProdotto(Integer.parseInt(request.getParameter("idProdotto")));
+
+			String fileName="";
+			File fileSavedDir = new File(savePath);
+			String tipo = request.getParameter("tipo");
+			String nome = request.getParameter("nomeProdotto");
+			String descizione = request.getParameter("descrizione");
+			double prezzo = Double.parseDouble(request.getParameter("prezzo"));
+
+			ProdottoBeanDao bndao = new ProdottoBeanDao();
+			ProdottoBean bn = new ProdottoBean();
+			if(!fileSavedDir.exists()){
+				fileSavedDir.mkdir();
+			}
+
+			//	out.write("upload =\n");
+			for(Part part: request.getParts()) {
+				fileName = extractFileName(part);
+				if(fileName != null && !fileName.equals("")) {
+					part.write(savePath + File.separator + fileName);
+					bn.setNome(nome);
+					bn.setDesc(descizione);
+					bn.setPrezzo(prezzo);
+					bn.setTipo(tipo);
+					bn.setImmagine(URLPath + File.separator + fileName);
+					//bn.setImmagine(savePath + File.separator + fileName);
+					try {
+						bndao.doDelete(old);
+						bndao.doSave(bn);
+
+						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/AddProdotto.jsp");
+						dispatcher.forward(request, response);
+
+
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					//out.write(savePath + File.separator + fileName +"\n");
+				}
+			}
+			//out.close();
+
+		}
 	}
 	private String extractFileName(Part part) {
 		String conentDisp= part.getHeader("content-disposition");
@@ -119,5 +176,5 @@ public class FileUploadServlet extends HttpServlet {
 		}
 		return "";
 	}
-	
+
 }
